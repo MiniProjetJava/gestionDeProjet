@@ -1,20 +1,13 @@
 package com.example.gestiondeprojet.presentation.controllers;
 
 import com.example.gestiondeprojet.HelloApplication;
-import com.example.gestiondeprojet.entities.Intervenant;
-import com.example.gestiondeprojet.entities.Users;
-import com.example.gestiondeprojet.entities.UsersTest;
-import com.example.gestiondeprojet.metier.IntervenantMetier;
-import com.example.gestiondeprojet.metier.UsersMetier;
-import com.example.gestiondeprojet.metier.UsersTestMetier;
+import com.example.gestiondeprojet.dao.entities.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 

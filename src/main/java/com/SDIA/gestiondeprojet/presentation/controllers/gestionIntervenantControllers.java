@@ -1,7 +1,7 @@
 package com.example.gestiondeprojet.presentation.controllers;
 
-import com.example.gestiondeprojet.entities.Intervenant;
-import com.example.gestiondeprojet.entities.UsersTest;
+import com.example.gestiondeprojet.dao.entities.Intervenant;
+import com.example.gestiondeprojet.dao.entities.UsersTest;
 import com.example.gestiondeprojet.metier.IntervenantMetier;
 import com.example.gestiondeprojet.metier.UsersMetier;
 import com.example.gestiondeprojet.metier.UsersTestMetier;

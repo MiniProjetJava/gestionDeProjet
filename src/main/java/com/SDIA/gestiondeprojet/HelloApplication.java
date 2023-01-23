@@ -1,7 +1,5 @@
 package com.example.gestiondeprojet;
 
-import com.example.gestiondeprojet.entities.Users;
-import com.example.gestiondeprojet.metier.UsersMetier;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

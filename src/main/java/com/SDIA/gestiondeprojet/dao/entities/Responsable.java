@@ -1,4 +1,4 @@
-package com.example.gestiondeprojet.entities;
+package com.example.gestiondeprojet.dao.entities;
 
 public class Responsable extends Users{
 

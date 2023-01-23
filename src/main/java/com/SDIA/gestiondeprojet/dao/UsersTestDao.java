@@ -1,8 +1,8 @@
 package com.example.gestiondeprojet.dao;
 
-import com.example.gestiondeprojet.entities.Intervenant;
-import com.example.gestiondeprojet.entities.Responsable;
-import com.example.gestiondeprojet.entities.UsersTest;
+import com.example.gestiondeprojet.dao.entities.Intervenant;
+import com.example.gestiondeprojet.dao.entities.Responsable;
+import com.example.gestiondeprojet.dao.entities.UsersTest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

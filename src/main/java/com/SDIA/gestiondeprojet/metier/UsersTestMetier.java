@@ -1,9 +1,8 @@
 package com.example.gestiondeprojet.metier;
 
 import com.example.gestiondeprojet.dao.UsersTestDao;
-import com.example.gestiondeprojet.entities.Intervenant;
-import com.example.gestiondeprojet.entities.Users;
-import com.example.gestiondeprojet.entities.UsersTest;
+import com.example.gestiondeprojet.dao.entities.Intervenant;
+import com.example.gestiondeprojet.dao.entities.UsersTest;
 
 import java.sql.SQLException;
 import java.util.List;

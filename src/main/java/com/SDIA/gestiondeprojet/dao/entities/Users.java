@@ -1,35 +1,20 @@
-package com.example.gestiondeprojet.entities;
+package com.example.gestiondeprojet.dao.entities;
 
-public class Intervenant extends Users {
-
-    public Intervenant(){
-        super();
-    }
-
-    public Intervenant(int id, String nom, String prenom, String adresse, String mail, String telephone, String password, String role) {
-        super(id, nom, prenom, adresse, mail, telephone, password, role);
-    }
-
-    public Intervenant(String nom, String prenom, String adresse, String mail, String telephone, String role) {
-        super(nom, prenom, adresse, mail, telephone, role);
-    }
-
-    public Intervenant(int id, String nom, String prenom, String adresse, String mail, String telephone, String password) {
-        super(id, nom, prenom, adresse, mail, telephone, password);
-    }
-
-    /*private int id;
+public class Users {
+    private int id;
     private String nom;
     private String prenom;
     private String adresse;
     private String mail;
     private String telephone;
-    private String password;
 
-    public Intervenant() {
+    private String password;
+    private String role;
+
+    public Users() {
     }
 
-    public Intervenant(int id, String nom, String prenom, String adresse, String mail, String telephone) {
+    public Users(int id, String nom, String prenom, String adresse, String mail, String telephone, String password , String role) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -37,18 +22,20 @@ public class Intervenant extends Users {
         this.mail = mail;
         this.telephone = telephone;
         this.password = password;
+        this.role = role;
     }
 
-    public Intervenant(String nom, String prenom, String adresse, String mail, String telephone) {
+    public Users(String nom, String prenom, String adresse, String mail, String telephone, String role) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.mail = mail;
         this.telephone = telephone;
-        this.password = password;
+        this.role = role;
     }
 
-    public Intervenant(String nom, String prenom, String adresse, String mail, String telephone, String password) {
+    public Users(int id, String nom, String prenom, String adresse, String mail, String telephone, String password) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -113,15 +100,24 @@ public class Intervenant extends Users {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "Intervenant{" +
+        return "Users{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", adresse='" + adresse + '\'' +
                 ", mail='" + mail + '\'' +
                 ", telephone='" + telephone + '\'' +
+                ", role='" + role + '\'' +
                 '}';
-    }*/
+    }
 }
