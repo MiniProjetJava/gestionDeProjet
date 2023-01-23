@@ -1,4 +1,4 @@
-package com.example.gestiondeprojet.dao.entities;
+package com.SDIA.gestiondeprojet.dao.entities;
 
 import java.io.Serializable;
 

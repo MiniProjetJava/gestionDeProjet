@@ -1,123 +1,123 @@
-package com.example.gestiondeprojet.dao.entities;
+package com.SDIA.gestiondeprojet.dao.entities;
 
 public class Users {
-    private int id;
-    private String nom;
-    private String prenom;
-    private String adresse;
-    private String mail;
-    private String telephone;
+    private int ID;
+    private String NOM;
+    private String PRENOM;
+    private String ADRESSE;
+    private String MAIL;
+    private String TELEPHONE;
 
-    private String password;
-    private String role;
+    private String PASSWORD;
+    private String ROLE;
 
     public Users() {
     }
 
     public Users(int id, String nom, String prenom, String adresse, String mail, String telephone, String password , String role) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.mail = mail;
-        this.telephone = telephone;
-        this.password = password;
-        this.role = role;
+        this.ID = id;
+        this.NOM = nom;
+        this.PRENOM = prenom;
+        this.ADRESSE = adresse;
+        this.MAIL = mail;
+        this.TELEPHONE = telephone;
+        this.PASSWORD = password;
+        this.ROLE = role;
     }
 
     public Users(String nom, String prenom, String adresse, String mail, String telephone, String role) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.mail = mail;
-        this.telephone = telephone;
-        this.role = role;
+        this.NOM = nom;
+        this.PRENOM = prenom;
+        this.ADRESSE = adresse;
+        this.MAIL = mail;
+        this.TELEPHONE = telephone;
+        this.ROLE = role;
     }
 
     public Users(int id, String nom, String prenom, String adresse, String mail, String telephone, String password) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.mail = mail;
-        this.telephone = telephone;
-        this.password = password;
+        this.ID = id;
+        this.NOM = nom;
+        this.PRENOM = prenom;
+        this.ADRESSE = adresse;
+        this.MAIL = mail;
+        this.TELEPHONE = telephone;
+        this.PASSWORD = password;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public String getNom() {
-        return nom;
+    public String getNOM() {
+        return NOM;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNOM(String NOM) {
+        this.NOM = NOM;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getPRENOM() {
+        return PRENOM;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setPRENOM(String PRENOM) {
+        this.PRENOM = PRENOM;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getADRESSE() {
+        return ADRESSE;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setADRESSE(String ADRESSE) {
+        this.ADRESSE = ADRESSE;
     }
 
-    public String getMail() {
-        return mail;
+    public String getMAIL() {
+        return MAIL;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setMAIL(String MAIL) {
+        this.MAIL = MAIL;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getTELEPHONE() {
+        return TELEPHONE;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setTELEPHONE(String TELEPHONE) {
+        this.TELEPHONE = TELEPHONE;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPASSWORD() {
+        return PASSWORD;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
     }
 
-    public String getRole() {
-        return role;
+    public String getROLE() {
+        return ROLE;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setROLE(String ROLE) {
+        this.ROLE = ROLE;
     }
 
     @Override
     public String toString() {
         return "Users{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", mail='" + mail + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", role='" + role + '\'' +
+                "id=" + ID +
+                ", nom='" + NOM + '\'' +
+                ", prenom='" + PRENOM + '\'' +
+                ", adresse='" + ADRESSE + '\'' +
+                ", mail='" + MAIL + '\'' +
+                ", telephone='" + TELEPHONE + '\'' +
+                ", role='" + ROLE + '\'' +
                 '}';
     }
 }

@@ -4,11 +4,13 @@ module com.example.gestiondeprojet {
     requires java.sql;
 
 
-    opens com.example.gestiondeprojet to javafx.fxml;
-    opens com.example.gestiondeprojet.presentation.controllers to javafx.fxml;
-    opens com.example.gestiondeprojet.entities to javafx.fxml, javafx.base;
+    opens com.SDIA.gestiondeprojet to javafx.fxml;
+    opens com.SDIA.gestiondeprojet.presentation.controllers to javafx.fxml;
+    opens com.SDIA.gestiondeprojet.dao.entities to javafx.fxml, javafx.base;
 
-    exports com.example.gestiondeprojet.presentation.controllers to javafx.fxml;
-    exports com.example.gestiondeprojet.entities to javafx.fxml, javafx.base;
-    exports com.example.gestiondeprojet;
+    exports com.SDIA.gestiondeprojet.presentation.controllers to javafx.fxml;
+    exports com.SDIA.gestiondeprojet.dao.entities to javafx.fxml, javafx.base;
+    exports com.SDIA.gestiondeprojet;
+    exports com.SDIA.gestiondeprojet.dao to javafx.base, javafx.fxml;
+    opens com.SDIA.gestiondeprojet.dao to javafx.base, javafx.fxml;
 }

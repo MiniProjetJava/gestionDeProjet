@@ -1,4 +1,4 @@
-package com.example.gestiondeprojet;
+package com.SDIA.gestiondeprojet;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

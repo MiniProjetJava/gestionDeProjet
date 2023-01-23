@@ -4,7 +4,7 @@ package com.SDIA.gestiondeprojet.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class SingletonConnexion {
+public class SignletonConnexion {
     private static final String HOST = "localhost";
     private static final String DB_NAME = "gestiondeprojet";
     private static final String USER_NAME = "root";

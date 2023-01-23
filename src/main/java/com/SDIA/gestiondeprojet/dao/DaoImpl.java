@@ -1,7 +1,7 @@
-package com.example.gestiondeprojet.dao;
+package com.SDIA.gestiondeprojet.dao;
 
-import com.example.gestiondeprojet.dao.entities.Intervenant;
-import com.example.gestiondeprojet.dao.entities.Responsable;
+import com.SDIA.gestiondeprojet.dao.entities.Intervenant;
+import com.SDIA.gestiondeprojet.dao.entities.Responsable;
 
 import java.sql.SQLException;
 import java.util.List;

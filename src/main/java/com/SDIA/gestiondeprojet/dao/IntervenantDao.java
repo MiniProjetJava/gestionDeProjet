@@ -1,7 +1,7 @@
-package com.example.gestiondeprojet.dao;
+package com.SDIA.gestiondeprojet.dao;
 
-import com.example.gestiondeprojet.dao.entities.Intervenant;
-import com.example.gestiondeprojet.dao.entities.Responsable;
+import com.SDIA.gestiondeprojet.dao.entities.Intervenant;
+import com.SDIA.gestiondeprojet.dao.entities.Responsable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.util.List;
 public class IntervenantDao implements DaoImpl<Intervenant>{
     @Override
     public Intervenant add(Intervenant intervenant) throws SQLException {
-        Connection con = SingletonConnexion.getConnection();
+        Connection con = SignletonConnexion.getConnection();
         PreparedStatement pst = con.prepareStatement("insert into intervenant(nom, prenom, adresse, mail, telephone, password) values (?,?,?,?,?,?)" );
         pst.setString(1, intervenant.getNom());
         pst.setString(2, intervenant.getPrenom());
@@ -28,7 +28,7 @@ public class IntervenantDao implements DaoImpl<Intervenant>{
 
     @Override
     public Intervenant update(Intervenant intervenant) throws SQLException {
-        Connection con = SingletonConnexion.getConnection();
+        Connection con = SignletonConnexion.getConnection();
 
         PreparedStatement pst = con.prepareStatement("update intervenant set nom = ?, prenom = ?, adresse = ?, mail = ?, telephone = ? where id = ?");
 
@@ -57,7 +57,7 @@ public class IntervenantDao implements DaoImpl<Intervenant>{
 
     @Override
     public void delete(int id) throws SQLException {
-        Connection con = SingletonConnexion.getConnection();
+        Connection con = SignletonConnexion.getConnection();
         PreparedStatement pst = con.prepareStatement("delete from intervenant where id=?");
         pst.setInt(1, id);
         pst.executeUpdate();
@@ -65,7 +65,7 @@ public class IntervenantDao implements DaoImpl<Intervenant>{
     }
 
     public List<Intervenant> findByMotCle(String mot) throws SQLException {
-        Connection con = SingletonConnexion.getConnection();
+        Connection con = SignletonConnexion.getConnection();
         PreparedStatement pst = con.prepareStatement("select * from allusers  where mail like ? ");
         pst.setString(1, "%"+mot+"%");
 

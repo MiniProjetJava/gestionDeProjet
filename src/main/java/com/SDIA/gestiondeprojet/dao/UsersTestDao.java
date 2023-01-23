@@ -1,8 +1,8 @@
-package com.example.gestiondeprojet.dao;
+package com.SDIA.gestiondeprojet.dao;
 
-import com.example.gestiondeprojet.dao.entities.Intervenant;
-import com.example.gestiondeprojet.dao.entities.Responsable;
-import com.example.gestiondeprojet.dao.entities.UsersTest;
+import com.SDIA.gestiondeprojet.dao.entities.Intervenant;
+import com.SDIA.gestiondeprojet.dao.entities.Responsable;
+import com.SDIA.gestiondeprojet.dao.entities.UsersTest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.util.List;
 public class UsersTestDao implements DaoImpl<UsersTest>{
     @Override
     public UsersTest add(UsersTest users) throws SQLException {
-        Connection con = SingletonConnexion.getConnection();
+        Connection con = SignletonConnexion.getConnection();
         PreparedStatement pst = con.prepareStatement("insert into users(role, password, mail) values (?,?,?)" );
         pst.setString(1, users.getRole());
         pst.setString(2, users.getPassword());
@@ -55,7 +55,7 @@ public class UsersTestDao implements DaoImpl<UsersTest>{
     }
 
     public int checkUsers(UsersTest usersTest) throws SQLException {
-        Connection con = SingletonConnexion.getConnection();
+        Connection con = SignletonConnexion.getConnection();
         PreparedStatement pst = con.prepareStatement("select count(1), role from users where mail=? and password=?");
         pst.setString(1, usersTest.getMail());
         pst.setString(2, usersTest.getPassword());

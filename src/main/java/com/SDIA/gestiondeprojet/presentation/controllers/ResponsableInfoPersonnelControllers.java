@@ -1,6 +1,6 @@
-package com.example.gestiondeprojet.presentation.controllers;
+package com.SDIA.gestiondeprojet.presentation.controllers;
 
-import com.example.gestiondeprojet.dao.entities.Users;
+import com.SDIA.gestiondeprojet.dao.entities.Users;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
