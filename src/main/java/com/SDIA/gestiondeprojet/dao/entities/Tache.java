@@ -1,12 +1,24 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Tache implements Serializable {
     private long ID;
     private String ETAT;
     private String CREATEUR;
     private String DESCRIPTION;
+
+    private List<Materielle> listmaterielles;
+
+    public List<Materielle> getListmaterielles() {
+        return listmaterielles;
+    }
+
+    public void setListmaterielles(List<Materielle> listmaterielles) {
+        this.listmaterielles = listmaterielles;
+    }
+
     public String getDESCRIPTION() {
         return DESCRIPTION;
     }

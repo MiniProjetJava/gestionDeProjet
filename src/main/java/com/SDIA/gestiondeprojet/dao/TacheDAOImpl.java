@@ -1,6 +1,6 @@
 package com.SDIA.gestiondeprojet.dao;
 
-import com.SDIA.gestiondeprojet.dao.entities.Tache;
+import com.SDIA.gestiondeprojet.dao.entities.*;
 import com.SDIA.gestiondeprojet.dao.entities.Tache;
 import com.SDIA.gestiondeprojet.dao.entities.Tache;
 import com.SDIA.gestiondeprojet.dao.entities.Tache;
@@ -33,6 +33,11 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                //Partie de chargement des materielles utilisées par cette tache :
+                List<Materielle> listMaterielles = new ArrayList<>();
+                listMaterielles = this.findAllMaterielles(tache);
+
+                tache.setListmaterielles(listMaterielles);
                 listTache.add(tache);
             }
             if (listTache.isEmpty()) {
@@ -57,6 +62,11 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                //Partie de chargement des materielles utilisées par cette tache :
+                List<Materielle> listMaterielles = new ArrayList<>();
+                listMaterielles = this.findAllMaterielles(tache);
+
+                tache.setListmaterielles(listMaterielles);
 
                 System.out.println("[INFO]-> The task identified by ID : " + tache.getID() + " has been returned successfully!");
             }
@@ -142,7 +152,11 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                //Partie de chargement des materielles utilisées par cette tache :
+                List<Materielle> listMaterielles = new ArrayList<>();
+                listMaterielles = this.findAllMaterielles(tache);
 
+                tache.setListmaterielles(listMaterielles);
                 listTaches.add(tache);
             }
             if (listTaches.isEmpty()) {
@@ -168,7 +182,11 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                //Partie de chargement des materielles utilisées par cette tache :
+                List<Materielle> listMaterielles = new ArrayList<>();
+                listMaterielles = this.findAllMaterielles(tache);
 
+                tache.setListmaterielles(listMaterielles);
                 listTaches.add(tache);
             }
             if (listTaches.isEmpty()) {
@@ -178,6 +196,26 @@ public class TacheDAOImpl implements TacheDAO{
 
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / SELECT-findByEtat]-> " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Materielle> findAllMaterielles(Tache tache) {
+        List<Materielle> listMaterielles = new ArrayList<>();
+        try {
+            ResultSet rs_materielles = st.executeQuery("select ID_MATERIELLE from AssocTacheMaterielle where ID_TACHE = " + tache.getID());
+            while (rs_materielles.next()) {
+                MaterielleDAO materielleDAO = new MaterielleDAOImpl();
+                Materielle materielle = materielleDAO.findById(rs_materielles.getInt(1));
+                listMaterielles.add(materielle);
+            }
+            if( listMaterielles.isEmpty() ){
+                System.out.println("[INFO]-> The task identified by ID: ' " + tache.getID() + " ' doesn't have any material available yet!");
+            }
+            return listMaterielles;
+        }catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findAllTasks >  TacheDAOImpl.java ]-> " + e.getMessage());
             return null;
         }
     }

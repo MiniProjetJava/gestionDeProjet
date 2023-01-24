@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UsersTestDao implements DaoImpl<UsersTest>{
+public class UsersTestDao implements old_daoImpl<UsersTest> {
     @Override
     public UsersTest add(UsersTest users) throws SQLException {
         Connection con = SignletonConnexion.getConnection();

@@ -9,7 +9,7 @@ public class Materielle implements Serializable {
     private String TYPE; //PC , Laptop , Souris, Imprimante, ..etc
     private String MARQUE;
     private String ETAT; //En service, En panne, Hors service
-    private List<Tache> listTaches = new ArrayList<>();
+    private List<Tache> listTaches;
 
     public long getID() {
         return ID;

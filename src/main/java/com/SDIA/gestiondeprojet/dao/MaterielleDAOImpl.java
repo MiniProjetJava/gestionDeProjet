@@ -32,19 +32,9 @@ public class MaterielleDAOImpl implements MaterielleDAO {
                 materielle.setTYPE(rs.getString("TYPE"));
                 materielle.setMARQUE(rs.getString("MARQUE"));
                 materielle.setETAT(rs.getString("ETAT"));
-
                 //Partie de chargement des taches utilisant ce materiel :
                 List<Tache> listTaches = new ArrayList<>();
-                    try {
-                        ResultSet rs_Taches = st.executeQuery("select ID_TACHE from AssocTacheMaterielle where ID_MATERIELLE = " + materielle.getID());
-                        while (rs_Taches.next()) {
-                            TacheDAO tacheDAO = new TacheDAOImpl();
-                            Tache tache = tacheDAO.findById(rs_Taches.getInt(1));
-                            listTaches.add(tache);
-                        }
-                    }catch (SQLException e) {
-                        System.out.println("[EXCEPTION TRIGGERED / SELECT-listTaches in file MaterielleDAOImpl ( findall() )]-> " + e.getMessage());
-                    }
+                listTaches = this.findAllTasks(materielle);
                 materielle.setListTaches(listTaches);
                 listMaterielle.add(materielle);
             }
@@ -67,14 +57,17 @@ public class MaterielleDAOImpl implements MaterielleDAO {
             //Mapping Occurrence to Object
             if(rs.next()) {
                 materielle.setID(rs.getLong("ID"));
+                materielle.setTYPE(rs.getString("TYPE"));
+                materielle.setMARQUE(rs.getString("MARQUE"));
                 materielle.setETAT(rs.getString("ETAT"));
-                materielle.setCREATEUR(rs.getString("CREATEUR"));
-                materielle.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                //Partie de chargement des taches utilisant ce materiel :
+                List<Tache> listTaches = new ArrayList<>();
+                listTaches = this.findAllTasks(materielle);
 
-                System.out.println("[INFO]-> The task identified by ID : " + materielle.getID() + " has been returned successfully!");
+                materielle.setListTaches(listTaches);
             }
             else {
-                System.out.println("[INFO]-> The task identified by ID: ' " + materielle.getID() + " ' doesn't exist in the MaterielleS table!");
+                System.out.println("[INFO]-> The material identified by ID: ' " + materielle.getID() + " ' doesn't exist in the MaterielleS table!");
             }
             return materielle;
 
@@ -88,17 +81,17 @@ public class MaterielleDAOImpl implements MaterielleDAO {
     public boolean update(Materielle Element) {
         try {
             int AffectedRow = st.executeUpdate("update Materielle " +
-                    "set ETAT = '" + Element.getETAT() + "', " +
-                    "CREATEUR = '" + Element.getCREATEUR() + "', " +
-                    "DESCRIPTION = '" + Element.getDESCRIPTION() + "' " +
+                    "set TYPE = '" + Element.getTYPE() + "', " +
+                    "MARQUE = '" + Element.getMARQUE() + "', " +
+                    "ETAT = '" + Element.getETAT() + "' " +
 
                     "where ID = " + Element.getID());
 
             if (AffectedRow > 0) {
-                System.out.println("[INFO]-> The task identified by [DESCRIPTION: " + Element.getDESCRIPTION() + "| ETAT: " + Element.getETAT() + "] has been updated successfully!");
+                System.out.println("[INFO]-> The material identified by [TYPE: " + Element.getTYPE() + "| ETAT: " + Element.getETAT() + "] has been updated successfully!");
                 return true;
             } else {
-                System.out.println("[INFO]-> The task identified by [DESCRIPTION: " + Element.getDESCRIPTION() + "| ETAT: " + Element.getETAT() + "] is not updated in the materielle table!");
+                System.out.println("[INFO]-> The material identified by [DESCRIPTION: " + Element.getTYPE() + "| ETAT: " + Element.getETAT() + "] is not updated in the materielle table!");
                 return false;
             }
 
@@ -115,13 +108,13 @@ public class MaterielleDAOImpl implements MaterielleDAO {
         PreparedStatement ps = connection.prepareStatement("insert into Materielle " +
                 "values(null, ?, ?, ?)");
 
-        ps.setString(1, Element.getETAT());
-        ps.setString(2, Element.getCREATEUR());
-        ps.setString(3, Element.getDESCRIPTION());
+        ps.setString(1, Element.getTYPE());
+        ps.setString(2, Element.getMARQUE());
+        ps.setString(3, Element.getETAT());
         int AffectedRow = ps.executeUpdate();
 
         if (AffectedRow > 0) {
-            System.out.println("[INFO]-> the task [DESCRIPTION: " + Element.getDESCRIPTION() + "| ETAT: " + Element.getETAT() + "] has been inserted successfully in table materielle !");
+            System.out.println("[INFO]-> the material [TYPE: " + Element.getTYPE() + "| ETAT: " + Element.getETAT() + "] has been inserted successfully in table materielle !");
         }
     } catch (SQLException e) {
         System.out.println("[EXCEPTION TRIGGERED / INSERT-Materielle]-> " + e.getMessage());
@@ -134,74 +127,92 @@ public class MaterielleDAOImpl implements MaterielleDAO {
         try {
             int AffectedRow = st.executeUpdate("delete from Materielle where id = " + materielle.getID());
             if (AffectedRow > 0) {
-                System.out.println("[INFO]-> The task with DESCRIPTION: '" + materielle.getDESCRIPTION() + "' | CREATOR: '" + materielle.getCREATEUR() + "' has been deleted successfully!");
+                System.out.println("[INFO]-> The material with TYPE: '" + materielle.getTYPE() + "' | ETAT: '" + materielle.getETAT() + "' has been deleted successfully!");
             } else
-                System.out.println("[INFO]-> The task with name DESCRIPTION: '" + materielle.getDESCRIPTION() + "' | CREATOR: '" + materielle.getCREATEUR() + "' doesn't exist in the table materielle!");
+                System.out.println("[INFO]-> The material with name TYPE: '" + materielle.getTYPE() + "' | ETAT: '" + materielle.getETAT() + "' doesn't exist in the table materielle!");
 
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / DELETE-Task]-> " + e.getMessage());
         }
     }
 
-    @Override
-    public List<Materielle> findByCreateur(String Createur) {
-        List<Materielle> listMaterielles = new ArrayList<>();
-        try {
-            ResultSet rs = st.executeQuery("select * from Materielle where CREATEUR = '"+Createur+"'");
-            //Mapping Occurrence to Object
-            while(rs.next()) {
-                Materielle materielle = new Materielle();
-                materielle.setID(rs.getLong("ID"));
-                materielle.setETAT(rs.getString("ETAT"));
-                materielle.setCREATEUR(rs.getString("CREATEUR"));
-                materielle.setDESCRIPTION(rs.getString("DESCRIPTION"));
 
+    @Override
+    public List<Materielle> findByType(String type) {
+        try {
+            List<Materielle> listMaterielles = new ArrayList<>();
+            Materielle materielle = new Materielle();
+            ResultSet rs = st.executeQuery("select * from Materielle where TYPE = "+type);
+            //Mapping Occurrence to Object
+            while (rs.next()) {
+                materielle.setID(rs.getLong("ID"));
+                materielle.setTYPE(rs.getString("TYPE"));
+                materielle.setMARQUE(rs.getString("MARQUE"));
+                materielle.setETAT(rs.getString("ETAT"));
+                //Partie de chargement des taches utilisant ce materiel :
+                List<Tache> listTaches = new ArrayList<>();
+                listTaches = this.findAllTasks(materielle);
+                materielle.setListTaches(listTaches);
                 listMaterielles.add(materielle);
             }
-            if (listMaterielles.isEmpty()) {
-                System.out.println("[INFO]-> The Task TABLE IS EMPTY !!");
+            if( listMaterielles.isEmpty() ){
+                System.out.println("[INFO]-> The material identified by TYPE: ' " + materielle.getTYPE() + " ' doesn't exist in the Materielle table!");
             }
             return listMaterielles;
 
         } catch (SQLException e) {
-            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByEtat]-> " + e.getMessage());
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByType > MaterielleDAOImpl.java]-> " + e.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public List<Materielle> findByType(String Createur) {
-        return null;
     }
 
     @Override
     public List<Materielle> findByEtat(String Etat) {
-        List<Materielle> listMaterielles = new ArrayList<>();
         try {
-            ResultSet rs = st.executeQuery("select * from Materielle where ETAT = '"+Etat+"'");
+            List<Materielle> listMaterielles = new ArrayList<>();
+            Materielle materielle = new Materielle();
+            ResultSet rs = st.executeQuery("select * from Materielle where ETAT = "+Etat);
             //Mapping Occurrence to Object
-            while(rs.next()) {
-                Materielle materielle = new Materielle();
+            while (rs.next()) {
                 materielle.setID(rs.getLong("ID"));
+                materielle.setTYPE(rs.getString("TYPE"));
+                materielle.setMARQUE(rs.getString("MARQUE"));
                 materielle.setETAT(rs.getString("ETAT"));
-                materielle.setCREATEUR(rs.getString("CREATEUR"));
-                materielle.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                //Partie de chargement des taches utilisant ce materiel :
+                List<Tache> listTaches = new ArrayList<>();
+                listTaches = this.findAllTasks(materielle);
 
+                materielle.setListTaches(listTaches);
                 listMaterielles.add(materielle);
             }
-            if (listMaterielles.isEmpty()) {
-                System.out.println("[INFO]-> The Task TABLE IS EMPTY !!");
+            if( listMaterielles.isEmpty() ){
+                System.out.println("[INFO]-> The material identified by TYPE: ' " + materielle.getTYPE() + " ' doesn't exist in the Materielle table!");
             }
             return listMaterielles;
 
         } catch (SQLException e) {
-            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByEtat]-> " + e.getMessage());
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByEtat > MaterielleDAOImpl.java]-> " + e.getMessage());
             return null;
         }
     }
 
     @Override
-    public List<Materielle> findAllTasks(Materielle materielle) {
-        return null;
+    public List<Tache> findAllTasks(Materielle materielle) {
+        List<Tache> listTaches = new ArrayList<>();
+        try {
+            ResultSet rs_Taches = st.executeQuery("select ID_TACHE from AssocTacheMaterielle where ID_MATERIELLE = " + materielle.getID());
+            while (rs_Taches.next()) {
+                TacheDAO tacheDAO = new TacheDAOImpl();
+                Tache tache = tacheDAO.findById(rs_Taches.getInt(1));
+                listTaches.add(tache);
+            }
+            if( listTaches.isEmpty() ){
+                System.out.println("[INFO]-> The material identified by ID: ' " + materielle.getID() + " ' doesn't have any task available yet!");
+            }
+            return listTaches;
+        }catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findAllTasks >  MaterielleDAOImpl.java ]-> " + e.getMessage());
+            return null;
+        }
     }
 }

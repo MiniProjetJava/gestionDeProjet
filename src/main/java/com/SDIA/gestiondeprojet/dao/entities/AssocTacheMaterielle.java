@@ -1,6 +1,9 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
-public class AssocTacheMaterielle {
+import javax.crypto.SecretKey;
+import java.io.Serializable;
+
+public class AssocTacheMaterielle implements Serializable {
     private long ID;
     private long ID_TACHE;
     private long ID_MATERIELLE;
