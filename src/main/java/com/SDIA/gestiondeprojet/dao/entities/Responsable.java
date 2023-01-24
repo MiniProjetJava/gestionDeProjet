@@ -1,6 +1,10 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Responsable extends Users{
+    //List<Project> listProjects = new ArrayList<>();
 
 
     public Responsable(int id, String nom, String prenom, String adresse, String mail, String telephone, String password, String role) {
