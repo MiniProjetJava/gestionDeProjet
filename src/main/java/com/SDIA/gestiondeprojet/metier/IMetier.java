@@ -13,5 +13,5 @@ public interface IMetier<T> {
     public T findByMail(String mail) throws SQLException;
     public T update(T o) throws SQLException;
 
-    // Commentaire
+    // CommentaireSSS
 }
