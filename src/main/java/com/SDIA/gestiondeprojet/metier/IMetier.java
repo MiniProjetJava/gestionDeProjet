@@ -12,4 +12,6 @@ public interface IMetier<T> {
     public List<T> findByMotClé(String mot) throws SQLException;
     public T findByMail(String mail) throws SQLException;
     public T update(T o) throws SQLException;
+
+    // Commentaire
 }
