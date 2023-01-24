@@ -28,7 +28,7 @@ public class UsersDAOImpl implements UsersDAO{
             //Mapping Occurrence to Object
             while(rs.next()) {
                 Users user = new Users();
-                user.setID(rs.getInt("ID"));
+                user.setID(rs.getLong("ID"));
                 user.setNOM(rs.getString("NOM"));
                 user.setPRENOM(rs.getString("PRENOM"));
                 user.setADRESSE(rs.getString("ADRESSE"));
@@ -57,7 +57,7 @@ public class UsersDAOImpl implements UsersDAO{
             ResultSet rs = st.executeQuery("select * from Users where ID = "+X);
             //Mapping Occurrence to Object
             if(rs.next()) {
-                user.setID(rs.getInt("ID"));
+                user.setID(rs.getLong("ID"));
                 user.setNOM(rs.getString("NOM"));
                 user.setPRENOM(rs.getString("PRENOM"));
                 user.setADRESSE(rs.getString("ADRESSE"));
@@ -86,7 +86,7 @@ public class UsersDAOImpl implements UsersDAO{
             //Mapping Occurrence to Object
             while(rs.next()) {
                 Users user = new Users();
-                user.setID(rs.getInt("ID"));
+                user.setID(rs.getLong("ID"));
                 user.setNOM(rs.getString("NOM"));
                 user.setPRENOM(rs.getString("PRENOM"));
                 user.setADRESSE(rs.getString("ADRESSE"));
@@ -183,7 +183,7 @@ public class UsersDAOImpl implements UsersDAO{
                 //Mapping Occurrence to Object
                 while(rs.next()) {
                     Users user = new Users();
-                    user.setID(rs.getInt("ID"));
+                    user.setID(rs.getLong("ID"));
                     user.setNOM(rs.getString("NOM"));
                     user.setPRENOM(rs.getString("PRENOM"));
                     user.setADRESSE(rs.getString("ADRESSE"));

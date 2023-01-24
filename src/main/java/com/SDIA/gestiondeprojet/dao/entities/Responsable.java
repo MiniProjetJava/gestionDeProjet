@@ -1,9 +1,10 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Responsable extends Users{
+public class Responsable extends Users implements Serializable {
     //List<Project> listProjects = new ArrayList<>();
 
 

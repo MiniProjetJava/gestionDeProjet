@@ -1,14 +1,18 @@
 package com.SDIA.gestiondeprojet.dao;
 
+import com.SDIA.gestiondeprojet.dao.DAO;
+import com.SDIA.gestiondeprojet.dao.entities.Materielle;
 import com.SDIA.gestiondeprojet.dao.entities.Tache;
 
 import java.util.List;
 
-public interface TacheDAO extends DAO<Tache>{
+public interface MaterielleDAO extends DAO<Materielle> {
 
-    List<Tache> findByCreateur(String Createur);
+    List<Materielle> findByType(String type);
 
-    List<Tache> findByEtat(String Etat);
+    List<Materielle> findByEtat(String Etat);
+
+    List<Tache> findAllTasks(Materielle materielle);
 
 
 }
