@@ -13,7 +13,7 @@ public class UsersDAOImpl implements UsersDAO{
 
     private Connection connection = SignletonConnexion.getConnection();
 
-    private Statement st = connection.createStatement();
+    private Statement st1 = connection.createStatement();
 
     public UsersDAOImpl() throws SQLException {
         try {
