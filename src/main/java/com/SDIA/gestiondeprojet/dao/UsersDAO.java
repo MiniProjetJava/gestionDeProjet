@@ -10,5 +10,7 @@ public interface UsersDAO extends DAO <Users>{
 
     List<Users> findByRole(String role);
     int findByUsers(Users users) throws SQLException;
+    List<Users> findAllIntervenant() throws SQLException;
+    List<Users> findAllResponsable();
 
 }

@@ -10,7 +10,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="801.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SDIA.gestiondeprojet.presentation.controllers.gestionIntervenantControllers">
+<AnchorPane prefHeight="801.0" prefWidth="1001.0"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.SDIA.gestiondeprojet.presentation.controllers.gestionIntervenantControllers"
+>
    <children>
       <VBox layoutX="-3.0" prefHeight="400.0" prefWidth="217.0">
          <children>

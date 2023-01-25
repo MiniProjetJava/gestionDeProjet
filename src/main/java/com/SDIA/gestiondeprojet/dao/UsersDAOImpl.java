@@ -138,16 +138,16 @@ public class UsersDAOImpl implements UsersDAO{
     @Override
     public void save(Users Element) {
         try {
-        PreparedStatement ps = connection.prepareStatement("insert into Client " +
-                "values(null, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement ps = connection.prepareStatement("insert into users(NOM, PRENOM, ADRESSE, TELEPHONE, ROLE, MAIL, PASSWORD) " +
+                "values(?, ?, ?, ?, ?, ?, ?)");
 
         ps.setString(1, Element.getNOM());
         ps.setString(2, Element.getPRENOM());
         ps.setString(3, Element.getADRESSE());
-        ps.setString(4, Element.getMAIL());
-        ps.setString(5, Element.getTELEPHONE());
-        ps.setString(6, Element.getROLE());
-
+        ps.setString(4, Element.getTELEPHONE());
+        ps.setString(5, Element.getROLE());
+        ps.setString(6, Element.getMAIL());
+        ps.setString(7, Element.getPASSWORD());
 
 
         int AffectedRow = ps.executeUpdate();
@@ -214,15 +214,53 @@ public class UsersDAOImpl implements UsersDAO{
 
         ResultSet rs = pst.executeQuery();
         while (rs.next()){
-            if((rs.getInt(1) == 1) && rs.getString(2).equals("Responsable")){
+            if ((rs.getInt(1) == 1) && rs.getString(2).equals("Responsable")){
                 return 1;
             }
-            else if ((rs.getInt(1) == 1) && rs.getString(2).equals("Intervenant")){
+            else if((rs.getInt(1) == 1) && rs.getString(2).equals("Intervenant")){
                 return 2;
             }
-            else{
-                return 0;
-            }
+
+            else return 0;
         }
+        return -1;
+    }
+
+    @Override
+    public List<Users> findAllIntervenant() throws SQLException {
+        List<Users> listUsers = new ArrayList<>();
+        Connection con = SignletonConnexion.getConnection();
+        PreparedStatement pst = con.prepareStatement("select * from users where ROLE = 'Intervenant'");
+        ResultSet rs = pst.executeQuery();
+
+        try {
+            //Mapping Occurrence to Object
+            while(rs.next()) {
+                Users user = new Users();
+                user.setID(rs.getLong("ID"));
+                user.setNOM(rs.getString("NOM"));
+                user.setPRENOM(rs.getString("PRENOM"));
+                user.setADRESSE(rs.getString("ADRESSE"));
+                user.setMAIL(rs.getString("MAIL"));
+                user.setTELEPHONE(rs.getString("TELEPHONE"));
+                user.setPASSWORD(rs.getString("PASSWORD"));
+                user.setROLE(rs.getString("ROLE"));
+
+                listUsers.add(user);
+            }
+            if (listUsers.isEmpty()) {
+                System.out.println("[INFO]-> The USERS TABLE IS EMPTY !!");
+            }
+            return listUsers;
+
+        } catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByRole]-> " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Users> findAllResponsable() {
+        return null;
     }
 }
