@@ -1,6 +1,7 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Users implements Serializable {
@@ -15,6 +16,8 @@ public class Users implements Serializable {
     private String ROLE;
 
     private List<Projet> listProjects; //que pour user avec le role : RESPONSABLE!!
+
+    private List<Tache> listTaches = new ArrayList<>();//POUR le RESPONSABLE et l'INTERVENANT!!
 
 
     public Users() {
@@ -125,6 +128,14 @@ public class Users implements Serializable {
 
     public void setROLE(String ROLE) {
         this.ROLE = ROLE;
+    }
+
+    public List<Tache> getListTaches() {
+        return listTaches;
+    }
+
+    public void setListTaches(List<Tache> listTaches) {
+        this.listTaches = listTaches;
     }
 
     @Override
