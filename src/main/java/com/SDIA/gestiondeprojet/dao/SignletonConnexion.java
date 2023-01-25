@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class SignletonConnexion {
     private static final String HOST = "localhost";
-    private static final String DB_NAME = "gestiondeprojet";
+    private static final String DB_NAME = "gestionprojets";
     private static final String USER_NAME = "root";
     private static final String PASSWORD = "";
     private static final String PORT = "3306";

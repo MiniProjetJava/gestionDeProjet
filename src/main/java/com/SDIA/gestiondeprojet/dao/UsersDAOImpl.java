@@ -214,10 +214,10 @@ public class UsersDAOImpl implements UsersDAO{
 
         ResultSet rs = pst.executeQuery();
         while (rs.next()){
-            if ((rs.getInt(1) == 1) && rs.getString(2).equals("Responsable")){
+            if ((rs.getInt(1) == 1) && rs.getString(2).equals("RESPONSABLE")){
                 return 1;
             }
-            else if((rs.getInt(1) == 1) && rs.getString(2).equals("Intervenant")){
+            else if((rs.getInt(1) == 1) && rs.getString(2).equals("INTERVENANT")){
                 return 2;
             }
 
