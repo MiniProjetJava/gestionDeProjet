@@ -1,6 +1,7 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Users implements Serializable {
     private long ID;
@@ -12,6 +13,9 @@ public class Users implements Serializable {
 
     private String PASSWORD;
     private String ROLE;
+
+    private List<Projet> listProjects; //que pour user avec le role : RESPONSABLE!!
+
 
     public Users() {
     }
@@ -49,6 +53,14 @@ public class Users implements Serializable {
     public Users(String mail, String password) {
         this.MAIL = mail;
         this.PASSWORD = password;
+    }
+
+    public List<Projet> getListProjects() {
+        return listProjects;
+    }
+
+    public void setListProjects(List<Projet> listProjects) {
+        this.listProjects = listProjects;
     }
 
     public long getID() {

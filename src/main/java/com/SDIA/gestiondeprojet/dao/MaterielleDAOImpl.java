@@ -67,7 +67,7 @@ public class MaterielleDAOImpl implements MaterielleDAO {
                 materielle.setListTaches(listTaches);
             }
             else {
-                System.out.println("[INFO]-> The material identified by ID: ' " + materielle.getID() + " ' doesn't exist in the MaterielleS table!");
+                System.out.println("[INFO]-> The material identified by ID: ' " + X + " ' doesn't exist in the Materielle table!");
             }
             return materielle;
 
@@ -91,7 +91,7 @@ public class MaterielleDAOImpl implements MaterielleDAO {
                 System.out.println("[INFO]-> The material identified by [TYPE: " + Element.getTYPE() + "| ETAT: " + Element.getETAT() + "] has been updated successfully!");
                 return true;
             } else {
-                System.out.println("[INFO]-> The material identified by [DESCRIPTION: " + Element.getTYPE() + "| ETAT: " + Element.getETAT() + "] is not updated in the materielle table!");
+                System.out.println("[INFO]-> The material identified by [TYPE: " + Element.getTYPE() + "| ETAT: " + Element.getETAT() + "] is not updated in the materielle table!");
                 return false;
             }
 
