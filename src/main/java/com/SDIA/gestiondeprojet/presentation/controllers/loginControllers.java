@@ -3,7 +3,6 @@ package com.SDIA.gestiondeprojet.presentation.controllers;
 import com.SDIA.gestiondeprojet.HelloApplication;
 import com.SDIA.gestiondeprojet.dao.entities.Users;
 import com.SDIA.gestiondeprojet.dao.entities.UsersTest;
-import com.SDIA.gestiondeprojet.metier.UsersMetier;
 import com.SDIA.gestiondeprojet.metier.UsersTestMetier;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,7 +1,9 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
-public class Users {
-    private int ID;
+import java.io.Serializable;
+
+public class Users implements Serializable {
+    private long ID;
     private String NOM;
     private String PRENOM;
     private String ADRESSE;
@@ -14,7 +16,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(int id, String nom, String prenom, String adresse, String mail, String telephone, String password , String role) {
+    public Users(long id, String nom, String prenom, String adresse, String mail, String telephone, String password , String role) {
         this.ID = id;
         this.NOM = nom;
         this.PRENOM = prenom;
@@ -44,11 +46,16 @@ public class Users {
         this.PASSWORD = password;
     }
 
-    public int getID() {
+    public Users(String mail, String password) {
+        this.MAIL = mail;
+        this.PASSWORD = password;
+    }
+
+    public long getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 

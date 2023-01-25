@@ -3,7 +3,6 @@ package com.SDIA.gestiondeprojet.presentation.controllers;
 import com.SDIA.gestiondeprojet.dao.entities.Intervenant;
 import com.SDIA.gestiondeprojet.dao.entities.UsersTest;
 import com.SDIA.gestiondeprojet.metier.IntervenantMetier;
-import com.SDIA.gestiondeprojet.metier.UsersMetier;
 import com.SDIA.gestiondeprojet.metier.UsersTestMetier;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
