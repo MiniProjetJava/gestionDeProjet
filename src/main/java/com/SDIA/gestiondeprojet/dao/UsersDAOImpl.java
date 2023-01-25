@@ -217,12 +217,10 @@ public class UsersDAOImpl implements UsersDAO{
             if((rs.getInt(1) == 1) && rs.getString(2).equals("Responsable")){
                 return 1;
             }
-            else if ((rs.getInt(1) == 1) && rs.getString(2).equals("Intervenant")){
+            if ((rs.getInt(1) == 1) && rs.getString(2).equals("Intervenant")){
                 return 2;
             }
-            else{
-                return 0;
-            }
+         }
+      return 0;
         }
     }
-}
