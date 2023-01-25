@@ -4,25 +4,80 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPaneInterface" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SDIA.gestiondeprojet.presentation.controllers.responsable.LoginControllers">
 
-   <children>
-      <AnchorPane layoutX="-1.0" prefHeight="400.0" prefWidth="232.0">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SDIA.gestiondeprojet.presentation.controllers.responsable.LoginControllers">
+   <center>
+      <AnchorPane fx:id="anchorPaneInterface" prefHeight="400.0" prefWidth="74.0" />
+   </center>
+   <left>
+      <AnchorPane prefHeight="30.0" prefWidth="232.0" style="-fx-background-color: #32DABC;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="58.0" layoutY="61.0" text="Nom de l'entreprise" />
+            <Label layoutX="33.0" layoutY="200.0" text="SDIA MARKETING" textFill="WHITE">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="17.0" />
+               </font>
+            </Label>
+            <Line endX="93.19999694824219" endY="-127.80000305175781" layoutX="115.0" layoutY="365.0" startX="-91.59999084472656" startY="-127.80000305175781">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Line endX="93.19999694824219" endY="-127.80000305175781" layoutX="116.0" layoutY="315.0" startX="-91.59999084472656" startY="-127.80000305175781">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Circle fill="DODGERBLUE" layoutX="187.0" layoutY="155.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="35.0" layoutY="270.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+            <Line endX="93.19999694824219" endY="-127.80000305175781" layoutX="73.0" layoutY="266.0" startX="63.80000305175781" startY="-146.00001525878906">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Line endX="55.99998474121094" endY="-124.00001525878906" layoutX="151.0" layoutY="258.0" startX="63.80000305175781" startY="-146.00001525878906">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Line endX="55.99998474121094" endY="-124.00001525878906" layoutX="-28.0" layoutY="444.0" startX="63.80000305175781" startY="-146.00001525878906">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Line endX="94.59999084472656" endY="-132.79998779296875" layoutX="-3.0" layoutY="426.0" startX="63.80000305175781" startY="-146.00001525878906">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Label layoutX="11.0" layoutY="354.0" text="Copyright (c). All Rights Reserved.">
+               <font>
+                  <Font name="Consolas" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="263.0" prefHeight="400.0" prefWidth="337.0">
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="125.0" layoutY="36.0" text="Identification" />
-            <Label layoutX="8.0" layoutY="83.0" text="Mail" />
+            <Label layoutX="8.0" layoutY="83.0" text="Email" />
             <Label layoutX="8.0" layoutY="136.0" text="Password" />
-            <Button fx:id="login" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#loginButton" text="Login" />
+            <Button fx:id="login" layoutX="33.0" layoutY="239.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #32DABC;" text="Login" />
             <TextField fx:id="mail" layoutX="101.0" layoutY="78.0" />
             <PasswordField fx:id="password" layoutX="101.0" layoutY="131.0" />
+            <Button fx:id="login1" layoutX="220.0" layoutY="239.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #FC315C;" text="Cancel" />
          </children>
       </AnchorPane>
-   </children>
-</AnchorPane>
+   </right>
+</BorderPane>
