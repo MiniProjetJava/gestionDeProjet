@@ -6,7 +6,7 @@ import java.util.List;
 public class Tache implements Serializable {
     private long ID;
     private String ETAT;
-    private String CREATEUR;
+    private Long ID_CREATEUR;
     private String DESCRIPTION;
 
     private long ID_PROJET;
@@ -53,12 +53,12 @@ public class Tache implements Serializable {
         this.ETAT = ETAT;
     }
 
-    public String getCREATEUR() {
-        return CREATEUR;
+    public long getID_CREATEUR() {
+        return ID_CREATEUR;
     }
 
-    public void setCREATEUR(String CREATEUR) {
-        this.CREATEUR = CREATEUR;
+    public void setID_CREATEUR(Long ID_CREATEUR) {
+        this.ID_CREATEUR = ID_CREATEUR;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Tache implements Serializable {
         return "Tache {" +
                 "ID=" + ID +
                 ", ETAT='" + ETAT + '\'' +
-                ", CREATEUR='" + CREATEUR + '\'' +
+                ", CREATEUR='" + ID_CREATEUR + '\'' +
                 ", DESCRIPTION='" + DESCRIPTION + '\'' +
                 ", ID_PROJET='" + ID_PROJET + '\'' +
                 '}';

@@ -29,7 +29,7 @@ public class TacheDAOImpl implements TacheDAO{
                 Tache tache = new Tache();
                 tache.setID(rs.getLong("ID"));
                 tache.setETAT(rs.getString("ETAT"));
-                tache.setCREATEUR(rs.getString("CREATEUR"));
+                tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
@@ -59,7 +59,7 @@ public class TacheDAOImpl implements TacheDAO{
             if(rs.next()) {
                 tache.setID(rs.getLong("ID"));
                 tache.setETAT(rs.getString("ETAT"));
-                tache.setCREATEUR(rs.getString("CREATEUR"));
+                tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
@@ -86,7 +86,7 @@ public class TacheDAOImpl implements TacheDAO{
         try {
             int AffectedRow = st.executeUpdate("update Tache " +
                     "set ETAT = '" + Element.getETAT() + "', " +
-                    "CREATEUR = '" + Element.getCREATEUR() + "', " +
+                    "ID_CREATEUR = '" + Element.getID_CREATEUR() + "', " +
                     "DESCRIPTION = '" + Element.getDESCRIPTION() + "' " +
 
                     "where ID = " + Element.getID());
@@ -113,7 +113,7 @@ public class TacheDAOImpl implements TacheDAO{
                 "values(null, ?, ?, ?, ?)");
 
         ps.setString(1, Element.getETAT());
-        ps.setString(2, Element.getCREATEUR());
+        ps.setLong(2, Element.getID_CREATEUR());
         ps.setString(3, Element.getDESCRIPTION());
         ps.setLong(4, Element.getID_PROJET());
         int AffectedRow = ps.executeUpdate();
@@ -132,9 +132,9 @@ public class TacheDAOImpl implements TacheDAO{
         try {
             int AffectedRow = st.executeUpdate("delete from Tache where id = " + tache.getID());
             if (AffectedRow > 0) {
-                System.out.println("[INFO]-> The task with DESCRIPTION: '" + tache.getDESCRIPTION() + "' | CREATOR: '" + tache.getCREATEUR() + "' has been deleted successfully!");
+                System.out.println("[INFO]-> The task with DESCRIPTION: '" + tache.getDESCRIPTION() + "' | CREATOR: '" + tache.getID_CREATEUR() + "' has been deleted successfully!");
             } else
-                System.out.println("[INFO]-> The task with name DESCRIPTION: '" + tache.getDESCRIPTION() + "' | CREATOR: '" + tache.getCREATEUR() + "' doesn't exist in the table tache!");
+                System.out.println("[INFO]-> The task with name DESCRIPTION: '" + tache.getDESCRIPTION() + "' | CREATOR: '" + tache.getID_CREATEUR() + "' doesn't exist in the table tache!");
 
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / DELETE-Task]-> " + e.getMessage());
@@ -151,7 +151,7 @@ public class TacheDAOImpl implements TacheDAO{
                 Tache tache = new Tache();
                 tache.setID(rs.getLong("ID"));
                 tache.setETAT(rs.getString("ETAT"));
-                tache.setCREATEUR(rs.getString("CREATEUR"));
+                tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
@@ -182,7 +182,7 @@ public class TacheDAOImpl implements TacheDAO{
                 Tache tache = new Tache();
                 tache.setID(rs.getLong("ID"));
                 tache.setETAT(rs.getString("ETAT"));
-                tache.setCREATEUR(rs.getString("CREATEUR"));
+                tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
@@ -232,7 +232,7 @@ public class TacheDAOImpl implements TacheDAO{
                 Tache tache = new Tache();
                 tache.setID(rs.getLong("ID"));
                 tache.setETAT(rs.getString("ETAT"));
-                tache.setCREATEUR(rs.getString("CREATEUR"));
+                tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
