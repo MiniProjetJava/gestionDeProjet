@@ -2,8 +2,6 @@ package com.SDIA.gestiondeprojet.dao;
 
 import com.SDIA.gestiondeprojet.dao.entities.*;
 import com.SDIA.gestiondeprojet.dao.entities.Tache;
-import com.SDIA.gestiondeprojet.dao.entities.Tache;
-import com.SDIA.gestiondeprojet.dao.entities.Tache;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,6 +31,7 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
@@ -62,16 +61,17 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
 
                 tache.setListmaterielles(listMaterielles);
 
-                System.out.println("[INFO]-> The task identified by ID : " + tache.getID() + " has been returned successfully!");
+                System.out.println("[INFO]-> The task identified by ID : " + X + " has been returned successfully!");
             }
             else {
-                System.out.println("[INFO]-> The task identified by ID: ' " + tache.getID() + " ' doesn't exist in the TacheS table!");
+                System.out.println("[INFO]-> The task identified by ID: ' " + X + " ' doesn't exist in the TacheS table!");
             }
             return tache;
 
@@ -110,11 +110,12 @@ public class TacheDAOImpl implements TacheDAO{
     public void save(Tache Element) {
         try {
         PreparedStatement ps = connection.prepareStatement("insert into Tache " +
-                "values(null, ?, ?, ?)");
+                "values(null, ?, ?, ?, ?)");
 
         ps.setString(1, Element.getETAT());
         ps.setString(2, Element.getCREATEUR());
         ps.setString(3, Element.getDESCRIPTION());
+        ps.setLong(4, Element.getID_PROJET());
         int AffectedRow = ps.executeUpdate();
 
         if (AffectedRow > 0) {
@@ -152,6 +153,7 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
@@ -182,6 +184,7 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setETAT(rs.getString("ETAT"));
                 tache.setCREATEUR(rs.getString("CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                tache.setID_PROJET(rs.getLong("ID_PROJET"));
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
@@ -216,6 +219,36 @@ public class TacheDAOImpl implements TacheDAO{
             return listMaterielles;
         }catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / SELECT-findAllTasks >  TacheDAOImpl.java ]-> " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Tache> findByProjet(Projet projet) {
+        List<Tache> listTaches = new ArrayList<>();
+        try {
+            ResultSet rs = st.executeQuery("select * from Tache where ID_PROJET = '"+projet.getID()+"'");
+            //Mapping Occurrence to Object
+            while(rs.next()) {
+                Tache tache = new Tache();
+                tache.setID(rs.getLong("ID"));
+                tache.setETAT(rs.getString("ETAT"));
+                tache.setCREATEUR(rs.getString("CREATEUR"));
+                tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                tache.setID_PROJET(rs.getLong("ID_PROJET"));
+                //Partie de chargement des materielles utilisées par cette tache :
+                List<Materielle> listMaterielles;
+                listMaterielles = this.findAllMaterielles(tache);
+
+                tache.setListmaterielles(listMaterielles);
+                listTaches.add(tache);
+            }
+            if (listTaches.isEmpty()) {
+                System.out.println("[INFO]-> The Task TABLE IS EMPTY !!");
+            }
+            return listTaches;
+
+        } catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByEtat]-> " + e.getMessage());
             return null;
         }
     }

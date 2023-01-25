@@ -9,7 +9,17 @@ public class Tache implements Serializable {
     private String CREATEUR;
     private String DESCRIPTION;
 
+    private long ID_PROJET;
+
     private List<Materielle> listmaterielles;
+
+    public long getID_PROJET() {
+        return ID_PROJET;
+    }
+
+    public void setID_PROJET(long ID_PROJET) {
+        this.ID_PROJET = ID_PROJET;
+    }
 
     public List<Materielle> getListmaterielles() {
         return listmaterielles;
@@ -57,6 +67,8 @@ public class Tache implements Serializable {
                 "ID=" + ID +
                 ", ETAT='" + ETAT + '\'' +
                 ", CREATEUR='" + CREATEUR + '\'' +
+                ", DESCRIPTION='" + DESCRIPTION + '\'' +
+                ", ID_PROJET='" + ID_PROJET + '\'' +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.SDIA.gestiondeprojet.dao;
 
-import com.SDIA.gestiondeprojet.dao.entities.Users;
+import com.SDIA.gestiondeprojet.dao.entities.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -66,10 +66,10 @@ public class UsersDAOImpl implements UsersDAO{
                 user.setPASSWORD(rs.getString("PASSWORD"));
                 user.setROLE(rs.getString("ROLE"));
 
-                System.out.println("[INFO]-> The User identified by ID : " + user.getID() + " has been returned successfully!");
+                System.out.println("[INFO]-> The User identified by ID : " + X + " has been returned successfully!");
             }
             else {
-                System.out.println("[INFO]-> The User identified by ID: ' " + user.getID() + " ' doesn't exist in the USERS table!");
+                System.out.println("[INFO]-> The User identified by ID: ' " + X + " ' doesn't exist in the USERS table!");
             }
             return user;
 
@@ -235,7 +235,7 @@ public class UsersDAOImpl implements UsersDAO{
 
         try {
             //Mapping Occurrence to Object
-            while(rs.next()) {
+            while (rs.next()) {
                 Users user = new Users();
                 user.setID(rs.getLong("ID"));
                 user.setNOM(rs.getString("NOM"));
@@ -255,12 +255,45 @@ public class UsersDAOImpl implements UsersDAO{
 
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / SELECT-findByRole]-> " + e.getMessage());
-            return null;
+
         }
+        return null;
+    }
+
+    public List<Tache> findAllTasks(Users user) {
+        List<Tache> listTaches = new ArrayList<>();
+        try {
+            ResultSet rs_Taches = st.executeQuery("select ID_TACHE from AssocTacheUser where ID_USER = " + user.getID());
+            while (rs_Taches.next()) {
+                TacheDAO tacheDAO = new TacheDAOImpl();
+                Tache tache = tacheDAO.findById(rs_Taches.getInt(1));
+                listTaches.add(tache);
+            }
+            if( listTaches.isEmpty() ){
+                System.out.println("[INFO]-> The material identified by ID: ' " + user.getID() + " ' doesn't have any task available yet!");
+            }
+            return listTaches;
+        }catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findAllTasks >  MaterielleDAOImpl.java ]-> " + e.getMessage());
+        }
+        return null;
     }
 
     @Override
+
     public List<Users> findAllResponsable() {
         return null;
     }
+
+    public List<Projet> findAllProjects(Responsable responsable) {
+        try {
+            List<Projet> listProjets = new ProjetDAOImpl().findByResponsable(responsable);
+            return listProjets;
+
+        }catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findAllProjects >  MaterielleDAOImpl.java ]-> " + e.getMessage());
+            return null;
+        }
+    }
 }
+

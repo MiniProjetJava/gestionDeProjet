@@ -60,7 +60,7 @@ public class AssocTacheMaterielleDAOImpl implements AssocTacheMaterielleDAO{
                 listTaMa.add(ATM);
             }
             if (listTaMa.isEmpty()) {
-                System.out.println("[INFO]-> The materiel with ID+"+tache.getID()+" doesn't exist in table AssocTacheMaterielle !!");
+                System.out.println("[INFO]-> The task with ID+"+tache.getID()+" doesn't exist in table AssocTacheMaterielle !!");
             }
             return listTaMa;
 
@@ -98,7 +98,7 @@ public class AssocTacheMaterielleDAOImpl implements AssocTacheMaterielleDAO{
     @Override
     public AssocTacheMaterielle findById(long X) {
         try {
-            ResultSet rs = st.executeQuery("select * from AssocTacheMaterielle where ID_TACHE = "+X);
+            ResultSet rs = st.executeQuery("select * from AssocTacheMaterielle where ID = "+X);
             AssocTacheMaterielle ATM = new AssocTacheMaterielle();
             //Mapping Occurrence to Object
             if(rs.next()) {

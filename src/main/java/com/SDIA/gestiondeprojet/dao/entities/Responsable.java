@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Responsable extends Users implements Serializable {
-    //List<Project> listProjects = new ArrayList<>();
 
+    public Responsable() {
+    }
 
     public Responsable(int id, String nom, String prenom, String adresse, String mail, String telephone, String password, String role) {
         super(id, nom, prenom, adresse, mail, telephone, password, role);
