@@ -29,9 +29,10 @@ public class LoginControllers implements Initializable {
     public void loginButton(ActionEvent actionEvent) throws SQLException, IOException {
         String mail_text = mail.getText();
         String password_text = password.getText();
+
         Users users = new Users(mail_text,password_text);
         UsersMetier usersMetier = new UsersMetier();
-        usersMetier.checkUsers(users);
+
         if (usersMetier.checkUsers(users) == 1){
             anchorPaneInterface.getScene().getWindow().hide();
             Stage stage = new Stage();
