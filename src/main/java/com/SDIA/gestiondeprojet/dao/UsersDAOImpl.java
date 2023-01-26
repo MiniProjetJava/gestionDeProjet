@@ -214,20 +214,18 @@ public class UsersDAOImpl implements UsersDAO{
     @Override
     public int findByUsers(Users users) throws SQLException {
         Connection con = SignletonConnexion.getConnection();
-        PreparedStatement pst = con.prepareStatement("select count(1), role from users where MAIL=? and PASSWORD=?");
+        PreparedStatement pst = con.prepareStatement("select role from users where MAIL=? and PASSWORD=?");
         pst.setString(1, users.getMAIL());
         pst.setString(2, users.getPASSWORD());
 
         ResultSet rs = pst.executeQuery();
         while (rs.next()){
-            if ((rs.getInt(1) == 1) && rs.getString(2).equals("Responsable")){
+            if (rs.getString(1).equals("RESPONSABLE")){
                 return 1;
             }
-            else if((rs.getInt(1) == 1) && rs.getString(2).equals("INTERVENANT")){
+            if(rs.getString(1).equals("INTERVENANT")) {
                 return 2;
             }
-
-            else return 0;
         }
         return -1;
     }

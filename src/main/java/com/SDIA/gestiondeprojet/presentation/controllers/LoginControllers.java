@@ -32,25 +32,8 @@ public class LoginControllers implements Initializable {
     private BorderPane borderPaneLOGIN;
 
     public void loginButton(ActionEvent actionEvent) throws SQLException, IOException {
-
-        /*String mail_text = email.getText();
-        String password_text = password.getText();
-
-        Users users = new Users(mail_text,password_text);
-        UsersMetier usersMetier = new UsersMetier();
-
-        if (usersMetier.checkUsers(users) == 1) {
-            borderPaneLOGIN.getScene().getWindow().hide();
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("responsableProjet/responsable.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-            stage.setTitle("Responsable");
-            stage.setScene(scene);
-            stage.show();
-        }*/
-
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         if(email.getText().isEmpty() || password.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR MESSAGE");
             alert.setHeaderText("ERROR : the fields of 'EMAIL', 'PASSWORD' are empty.");
             alert.setContentText("Solution : Please fill the fields above with the correct data and then press the button [LOGIN].");
@@ -70,6 +53,11 @@ public class LoginControllers implements Initializable {
                 stage.setTitle("Responsable");
                 stage.setScene(scene);
                 stage.show();
+            }
+            else{
+                alert.setTitle("ERROR MESSAGE");
+                alert.setHeaderText("ERROR : Email ou mot de passe sont invalide.");
+                alert.showAndWait();
             }
         }
     }
