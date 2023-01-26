@@ -37,8 +37,8 @@ public class UsersMetier implements IMetier<Users>{
     }
 
     @Override
-    public Users update(Users o) throws SQLException {
-        return null;
+    public Boolean update(Users o) throws SQLException {
+        return new UsersDAOImpl().update(o);
     }
 
     public List<Users> findIntervenant() throws SQLException {
@@ -49,15 +49,15 @@ public class UsersMetier implements IMetier<Users>{
     public int checkUsers(Users users) throws SQLException {
         UsersDAOImpl usersDAO = new UsersDAOImpl();
         if (usersDAO.findByUsers(users) == 1){
-            System.out.println("Vous etes responsable");
+            System.out.println(">> Vous etes responsable !");
             return 1;
         }
         else if(usersDAO.findByUsers(users) == 2){
-            System.out.println("Vous etes intervenant");
+            System.out.println(">> Vous etes intervenant !");
             return 2;
         }
         else {
-            System.out.println("Qui etes vous");
+            System.out.println(">> Qui etes vous ??");
             return 0;
         }
     }

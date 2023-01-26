@@ -11,6 +11,6 @@ public interface IMetier<T> {
     public void delete(T o) throws SQLException;
     public List<T> findByMotCle(String mot) throws SQLException;
     public T findByMail(String mail) throws SQLException;
-    public T update(T o) throws SQLException;
+    public Boolean update(T o) throws SQLException;
 
 }

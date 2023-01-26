@@ -1,6 +1,6 @@
 package com.SDIA.gestiondeprojet.presentation.controllers;
 
-import com.SDIA.gestiondeprojet.HelloApplication;
+import com.SDIA.gestiondeprojet.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +27,7 @@ public class ResponsableMenuControllers implements Initializable {
         //anchorPaneMenuResponsable.getScene().getWindow().hide();
 
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("responsableProjet/gestionIntervenantInterface.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("responsableProjet/gestionIntervenantInterface.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         stage.setTitle("Gestion des Intervenants");
         stage.setScene(scene);

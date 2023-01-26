@@ -103,13 +103,35 @@ public class gestionIntervenantControllers implements Initializable {
     }
 
     @FXML
-    void EnregistrerIntervenant(ActionEvent event) {
+    void EnregistrerIntervenant(ActionEvent event) throws SQLException {
+        int id = (int) ModifierIntervenant(event);
+        String nom_text = nom.getText();
+        String prenom_text = prenom.getText();
+        String adresse_text = adresse.getText();
+        String mail_text = mail.getText();
+        String telephone_text = telephone.getText();
+        String password_text = password.getText();
+
+        Users users = new Users(id,nom_text,prenom_text, adresse_text,mail_text,telephone_text,password_text);
+
+        UsersMetier usersMetier = new UsersMetier();
+        usersMetier.update(users);
+        loadIntervenant();
 
     }
 
     @FXML
-    void ModifierIntervenant(ActionEvent event) {
+    long ModifierIntervenant(ActionEvent event) {
+        Users users = tableViewIntervenant.getSelectionModel().getSelectedItem();
+        nom.setText(users.getNOM());
+        prenom.setText(users.getPRENOM());
+        adresse.setText(users.getADRESSE());
+        mail.setText(users.getMAIL());
+        telephone.setText(users.getTELEPHONE());
+        password.setText(users.getPASSWORD());
+        long id = users.getID();
 
+        return id;
     }
 
 
@@ -131,6 +153,7 @@ public class gestionIntervenantControllers implements Initializable {
         users.setPASSWORD(password.getText());
 
         new UsersMetier().add(users);
+        loadIntervenant();
     }
 
     private void loadIntervenant() throws SQLException {

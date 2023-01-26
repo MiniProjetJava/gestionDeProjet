@@ -111,15 +111,20 @@ public class UsersDAOImpl implements UsersDAO{
     @Override
     public boolean update(Users Element) {
         try {
-            int AffectedRow = st.executeUpdate("update Client " +
+            int AffectedRow = st.executeUpdate("update users " +
                     "set NOM = '" + Element.getNOM() + "', " +
                     "PRENOM = '" + Element.getPRENOM() + "', " +
                     "ADRESSE = '" + Element.getADRESSE() + "', " +
                     "MAIL = '" + Element.getMAIL() + "', " +
                     "TELEPHONE = '" + Element.getTELEPHONE() + "', " +
-                    "ROLE = '" + Element.getROLE() + "' " +
-
                     "where ID = " + Element.getID());
+            /*PreparedStatement pst = connection.prepareStatement("update users set NOM=?, PRENOM=?,ADRESSE=?,MAIL=?,TELEPHONE=? where ID=?");
+            pst.setString(1, Element.getNOM());
+            pst.setString(2, Element.getPRENOM());
+            pst.setString(3, Element.getADRESSE());
+            pst.setString(4, Element.getMAIL());
+            pst.setString(5, Element.getTELEPHONE());
+            pst.setLong(6, Element.getID());*/
 
             if (AffectedRow > 0) {
                 System.out.println("[INFO]-> The user identified by 'Nom : " + Element.getNOM() + " | ROLE : " + Element.getROLE() + "' has been updated successfully!");
@@ -134,8 +139,9 @@ public class UsersDAOImpl implements UsersDAO{
             return false;
 
         }
+
     }
-    @Override
+        @Override
     public void save(Users Element) {
         try {
         PreparedStatement ps = connection.prepareStatement("insert into users(NOM, PRENOM, ADRESSE, TELEPHONE, ROLE, MAIL, PASSWORD) " +
@@ -217,7 +223,7 @@ public class UsersDAOImpl implements UsersDAO{
             if ((rs.getInt(1) == 1) && rs.getString(2).equals("Responsable")){
                 return 1;
             }
-            else if((rs.getInt(1) == 1) && rs.getString(2).equals("Intervenant")){
+            else if((rs.getInt(1) == 1) && rs.getString(2).equals("INTERVENANT")){
                 return 2;
             }
 
