@@ -207,11 +207,17 @@ public class TacheDAOImpl implements TacheDAO{
     public List<Materielle> findAllMaterielles(Tache tache) {
         List<Materielle> listMaterielles = new ArrayList<>();
         try {
-            ResultSet rs_materielles = st.executeQuery("select ID_MATERIELLE from AssocTacheMaterielle where ID_TACHE = " + tache.getID());
+            ResultSet rs_materielles = connection.createStatement().executeQuery("select ID_MATERIELLE from AssocTacheMaterielle where ID_TACHE = " + tache.getID());
             while (rs_materielles.next()) {
-                MaterielleDAO materielleDAO = new MaterielleDAOImpl();
-                Materielle materielle = materielleDAO.findById(rs_materielles.getInt(1));
-                listMaterielles.add(materielle);
+                Materielle materielle = new Materielle();
+                ResultSet rs = connection.createStatement().executeQuery("select * from materielle where ID = " + rs_materielles.getInt(1));
+                if (rs.next()) {
+                    materielle.setID(rs.getLong("ID"));
+                    materielle.setTYPE(rs.getString("TYPE"));
+                    materielle.setMARQUE(rs.getString("MARQUE"));
+                    materielle.setETAT(rs.getString("ETAT"));
+                    listMaterielles.add(materielle);
+                }
             }
             if( listMaterielles.isEmpty() ){
                 System.out.println("[INFO]-> The task identified by ID: ' " + tache.getID() + " ' doesn't have any material available yet!");

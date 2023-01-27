@@ -75,6 +75,15 @@ public class MaterielleDAOImpl implements MaterielleDAO {
             System.out.println("[EXCEPTION TRIGGERED / SELECT-Materielle]-> " + e.getMessage());
             return null;
         }
+        finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     @Override
@@ -200,10 +209,18 @@ public class MaterielleDAOImpl implements MaterielleDAO {
     public List<Tache> findAllTasks(Materielle materielle) {
         List<Tache> listTaches = new ArrayList<>();
         try {
-            ResultSet rs_Taches = st.executeQuery("select ID_TACHE from AssocTacheMaterielle where ID_MATERIELLE = " + materielle.getID());
+            ResultSet rs_Taches = connection.createStatement().executeQuery("select ID_TACHE from AssocTacheMaterielle where ID_MATERIELLE = " + materielle.getID());
             while (rs_Taches.next()) {
-                TacheDAO tacheDAO = new TacheDAOImpl();
-                Tache tache = tacheDAO.findById(rs_Taches.getInt(1));
+                Tache tache = new Tache();
+                ResultSet rs = connection.createStatement().executeQuery("select * from Tache where ID = " + rs_Taches.getInt(1));
+                if(rs.next()){
+                    tache.setID(rs.getLong("ID"));
+                    tache.setETAT(rs.getString("ETAT"));
+                    tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
+                    tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                    tache.setID_PROJET(rs.getLong("ID_PROJET"));
+
+                }
                 listTaches.add(tache);
             }
             if( listTaches.isEmpty() ){

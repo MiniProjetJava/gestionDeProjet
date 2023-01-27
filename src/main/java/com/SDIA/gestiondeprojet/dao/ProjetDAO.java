@@ -12,5 +12,4 @@ public interface ProjetDAO extends DAO<Projet> {
     List<Tache> findAllTasks(Projet projet);
     List<Projet> findByResponsable(Responsable responsable);
 
-
 }
