@@ -30,7 +30,7 @@ public class TacheMetierImpl implements TacheMetier {
         tacheDAO.save(Element);
     }
 
-    public void delete(Tache tache){
+    public void delete(Tache tache) throws SQLException {
         tacheDAO.delete(tache);
     }
 

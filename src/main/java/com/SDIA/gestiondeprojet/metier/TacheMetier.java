@@ -17,7 +17,7 @@ import java.util.List;
 
      void insertTache(Tache Element);
 
-     void delete(Tache tache);
+     void delete(Tache tache) throws SQLException;
 
      List<Tache> selectTacheByCreateur(String Createur);
 

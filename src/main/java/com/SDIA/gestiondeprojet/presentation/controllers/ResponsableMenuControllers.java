@@ -23,8 +23,6 @@ public class ResponsableMenuControllers implements Initializable {
     }
 
     public void gestionDesIntervenants(ActionEvent actionEvent) throws IOException {
-        //anchorPaneMenuResponsable.getScene().getWindow().hide();
-        //anchorPaneMenuResponsable.getScene().getWindow().hide();
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("responsableProjet/gestionIntervenantInterface.fxml"));

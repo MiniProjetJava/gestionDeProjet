@@ -23,22 +23,22 @@ public class UsersMetier implements IMetier<Users>{
 
     @Override
     public void delete(Users o) throws SQLException {
-
+        new UsersDAOImpl().delete(o);
     }
 
     @Override
     public List<Users> findByMotCle(String mot) throws SQLException {
-        return null;
+        return new UsersDAOImpl().findbyMotCle(mot);
     }
 
     @Override
     public Users findByMail(String mail) throws SQLException {
-        return null;
+        return new UsersDAOImpl().findByMail(mail);
     }
 
     @Override
-    public Boolean update(Users o) throws SQLException {
-        return new UsersDAOImpl().update(o);
+    public Users update(Users o) throws SQLException {
+        return new UsersDAOImpl().updateUser(o);
     }
 
     public List<Users> findIntervenant() throws SQLException {

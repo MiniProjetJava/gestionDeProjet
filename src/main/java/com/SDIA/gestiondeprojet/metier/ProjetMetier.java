@@ -22,7 +22,7 @@ public interface ProjetMetier {
 
     public void insertProjet(Projet Element);
 
-    public void deleteProjet(Projet p);
+    public void deleteProjet(Projet p) throws SQLException;
 
     public List<Tache> selectAllTaskDeProjet(Projet projet);
 
