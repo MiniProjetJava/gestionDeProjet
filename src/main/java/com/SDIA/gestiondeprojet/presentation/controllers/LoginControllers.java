@@ -47,14 +47,33 @@ public class LoginControllers implements Initializable {
 
             if (usersMetier.checkUsers(user) == 1) {
                 borderPaneLOGIN.getScene().getWindow().hide();
+                String mail = email.getText();
+                SingletonData data = SingletonData.getInstance();
+                data.setMail(mail);
+
                 Stage stage = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("responsableProjet/responsable.fxml"));
+
+
                 Scene scene = new Scene(fxmlLoader.load(), 600, 600);
                 stage.setTitle("Responsable");
                 stage.setScene(scene);
                 stage.show();
-            }
-            else{
+            } else if (usersMetier.checkUsers(user) == 2) {
+                borderPaneLOGIN.getScene().getWindow().hide();
+                String mail = email.getText();
+                SingletonData data = SingletonData.getInstance();
+                data.setMail(mail);
+
+                Stage stage = new Stage();
+                FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("Intervenant/intervenantAcceuil.fxml"));
+
+
+                Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+                stage.setTitle("Intervenant");
+                stage.setScene(scene);
+                stage.show();
+            } else{
                 alert.setTitle("ERROR MESSAGE");
                 alert.setHeaderText("ERROR : Email ou mot de passe sont invalide.");
                 alert.showAndWait();

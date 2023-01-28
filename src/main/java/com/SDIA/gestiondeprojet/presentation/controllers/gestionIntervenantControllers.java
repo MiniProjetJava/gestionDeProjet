@@ -10,14 +10,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class gestionIntervenantControllers implements Initializable {
@@ -80,18 +78,37 @@ public class gestionIntervenantControllers implements Initializable {
         colMail.setCellValueFactory(new PropertyValueFactory<>("MAIL"));
         colTelephone.setCellValueFactory(new PropertyValueFactory<>("TELEPHONE"));
 
-        /*search.textProperty().addListener(new ChangeListener<String>() {
+        search.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 try {
-                    new ProduitService().findByMotClé(t1);
-                    produitObservableList.clear();
-                    produitObservableList.addAll(new ProduitService().findByMotClé(t1));
+                    new UsersMetier().findByMotCle(t1);
+                    intervenantObservableList.clear();
+                    intervenantObservableList.addAll(new UsersMetier().findByMotCle(t1));
+                    if(t1.equals("")){
+                        intervenantObservableList.clear();
+                        intervenantObservableList.addAll(new UsersMetier().findIntervenant());
+                    }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
-        });*/
+        });
+
+        // Ce eveneement sert à remplir le champ des TextFields une fois qu'on appuie sur l'un d'eux
+        tableViewIntervenant.getSelectionModel().selectedItemProperty().addListener((observableValue, oldObject, newObject) -> {
+            if (newObject != null) {
+                {
+                    nom.setText(newObject.getNOM());
+                    prenom.setText(newObject.getPRENOM());
+                    adresse.setText(String.valueOf(newObject.getADRESSE()));
+                    mail.setText(String.valueOf(newObject.getMAIL()));
+                    telephone.setText(String.valueOf(newObject.getTELEPHONE()));
+                    password.setText(String.valueOf(newObject.getPASSWORD()));
+
+                }
+            }
+        });
 
 
         try {
@@ -104,39 +121,105 @@ public class gestionIntervenantControllers implements Initializable {
 
     @FXML
     void EnregistrerIntervenant(ActionEvent event) throws SQLException {
-        int id = (int) ModifierIntervenant(event);
+        //int id = (int) ModifierIntervenant(event);
+
         String nom_text = nom.getText();
         String prenom_text = prenom.getText();
         String adresse_text = adresse.getText();
         String mail_text = mail.getText();
         String telephone_text = telephone.getText();
         String password_text = password.getText();
+        /*Users users = new Users(nom_text, prenom_text,adresse_text,mail_text,telephone_text,password_text, "Intervenant");
 
-        Users users = new Users(id,nom_text,prenom_text, adresse_text,mail_text,telephone_text,password_text);
+        System.out.println(users);
+        new UsersMetier().update(users);
+        loadIntervenant();*/
 
-        UsersMetier usersMetier = new UsersMetier();
-        usersMetier.update(users);
-        loadIntervenant();
+        nom.setText("");
+        prenom.setText("");
+        adresse.setText("");
+        mail.setText("");
+        telephone.setText("");
+        password.setText("");
 
     }
 
     @FXML
-    long ModifierIntervenant(ActionEvent event) {
+    void ModifierIntervenant(ActionEvent event) throws SQLException {
         Users users = tableViewIntervenant.getSelectionModel().getSelectedItem();
-        nom.setText(users.getNOM());
-        prenom.setText(users.getPRENOM());
-        adresse.setText(users.getADRESSE());
-        mail.setText(users.getMAIL());
-        telephone.setText(users.getTELEPHONE());
-        password.setText(users.getPASSWORD());
-        long id = users.getID();
 
-        return id;
+        if(users != null) {
+            if(!nom.getText().isEmpty() && !prenom.getText().isEmpty() && !adresse.getText().isEmpty() && !mail.getText().isEmpty()
+                    && !telephone.getText().isEmpty() && !password.getText().isEmpty()) {
+
+                users.setNOM(nom.getText());
+                users.setPRENOM(prenom.getText());
+                users.setADRESSE(adresse.getText());
+                users.setMAIL(mail.getText());
+                users.setTELEPHONE(telephone.getText());
+                users.setPASSWORD(password.getText());
+                users.setID(users.getID());
+
+                new UsersMetier().update(users);
+                loadIntervenant();
+
+                nom.setText("");
+                prenom.setText("");
+                adresse.setText("");
+                mail.setText("");
+                telephone.setText("");
+                password.setText("");
+
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR MESSAGE");
+                alert.setHeaderText("ERROR : there is a field empty.");
+                alert.setContentText("Solution : Please fill all the fields and then press the button [Update].");
+                Optional<ButtonType> result = alert.showAndWait();
+                //if(optional.get()==ButtonType.OK) {
+
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR MESSAGE");
+            alert.setHeaderText("ERROR : there is no selected product from the table below.");
+            alert.setContentText("Solution : Please try to select a product and then press the button [Update].");
+            Optional<ButtonType> result = alert.showAndWait();
+            //if(optional.get()==ButtonType.OK) {
+
+        }
+
     }
 
 
     @FXML
-    void supprimerIntervenant(ActionEvent event) {
+    void supprimerIntervenant(ActionEvent event) throws SQLException {
+        Users users = tableViewIntervenant.getSelectionModel().getSelectedItem();
+
+        if(users != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("CONFIRMATION MESSAGE");
+            alert.setHeaderText("The user with id : "+users.getID()+" | Name : "+users.getNOM()+" will be deleted. Press [OK]");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if(result.get() == ButtonType.OK){
+                new UsersMetier().delete(users);
+                //loadIntervenant();
+                intervenantObservableList.remove(users);
+
+            }
+        }
+
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR MESSAGE");
+            alert.setHeaderText("ERROR : there is no selected product from the table below.");
+            alert.setContentText("Solution : Please try to select a product and then press the button [Delete].");
+            alert.showAndWait();
+        }
+
 
     }
 

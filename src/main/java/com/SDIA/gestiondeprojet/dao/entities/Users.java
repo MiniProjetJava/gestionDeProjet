@@ -43,7 +43,7 @@ public class Users implements Serializable {
         this.ROLE = role;
     }
 
-    public Users(int id, String nom, String prenom, String adresse, String mail, String telephone, String password) {
+    public Users(long id, String nom, String prenom, String adresse, String mail, String telephone, String password) {
         this.ID = id;
         this.NOM = nom;
         this.PRENOM = prenom;

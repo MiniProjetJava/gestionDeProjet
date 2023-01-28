@@ -36,7 +36,7 @@ public class ProjetMetierImpl implements ProjetMetier{
     }
 
     @Override
-    public void deleteProjet(Projet p) {
+    public void deleteProjet(Projet p) throws SQLException {
          projetDAO.delete(p);
     }
 

@@ -15,7 +15,7 @@ public interface DAO <T> {
 
     void save(T Element);
 
-    void delete(T p); //supprimer un ou plusieurs occurences
+    void delete(T p) throws SQLException; //supprimer un ou plusieurs occurences
 
 
 }
