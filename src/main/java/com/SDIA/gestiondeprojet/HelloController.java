@@ -1,5 +1,6 @@
 package com.SDIA.gestiondeprojet;
 
+import com.SDIA.gestiondeprojet.dao.MaterielleDAOImpl;
 import com.SDIA.gestiondeprojet.dao.SignletonConnexion;
 import com.SDIA.gestiondeprojet.dao.entities.Materielle;
 import com.SDIA.gestiondeprojet.dao.entities.Tache;
@@ -21,13 +22,10 @@ public class HelloController {
         System.out.println(">>>> Connection success !");
 
         try{
-            TacheMetier tm = new TacheMetierImpl();
-            List<Tache> lT = tm.selectAll();
+            List<Materielle> lM = new TacheMetierImpl().selectMateriellesDeTache(new TacheMetierImpl().selectTacheByID(1)) ;
 
-                for(Materielle m :tm.selectMateriellesDeTache(lT.get(0)) ){
-                    System.out.println(m);
-
-            }
+            Materielle t = lM.get(0);
+            System.out.println("*** "+t.getGERANT_EMAIL()+"| "+t.getPROJET_DESCRIPTION());
 
 
 

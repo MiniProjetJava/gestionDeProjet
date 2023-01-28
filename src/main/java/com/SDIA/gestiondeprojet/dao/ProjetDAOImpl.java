@@ -154,7 +154,7 @@ public class ProjetDAOImpl implements ProjetDAO{
     }
 
     @Override
-    public List<Projet> findByResponsable(Responsable responsable) {
+    public List<Projet> findByResponsable(Users responsable) {
         try {
             List<Projet> listProjets = new ArrayList<>();
             ResultSet rs = st.executeQuery("select * from Projet where ID_RESPONSABLE = "+responsable.getID());

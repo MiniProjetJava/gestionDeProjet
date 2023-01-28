@@ -1,8 +1,6 @@
 package com.SDIA.gestiondeprojet.presentation.controllers;
 
 public class SingletonData {
-    private SingletonData() {
-    }
 
     private static final SingletonData instance = new SingletonData();
 

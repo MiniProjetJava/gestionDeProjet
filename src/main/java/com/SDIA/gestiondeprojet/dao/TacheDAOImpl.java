@@ -32,6 +32,8 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
+                tache.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
+                tache.setCREATEUR_EMAIL(new UsersDAOImpl().findById(tache.getID_CREATEUR()).getMAIL());
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
@@ -62,6 +64,8 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
+                tache.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
+                tache.setCREATEUR_EMAIL(new UsersDAOImpl().findById(tache.getID_CREATEUR()).getMAIL());
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
@@ -86,7 +90,6 @@ public class TacheDAOImpl implements TacheDAO{
         try {
             int AffectedRow = st.executeUpdate("update Tache " +
                     "set ETAT = '" + Element.getETAT() + "', " +
-                    "ID_CREATEUR = '" + Element.getID_CREATEUR() + "', " +
                     "DESCRIPTION = '" + Element.getDESCRIPTION() + "' " +
 
                     "where ID = " + Element.getID());
@@ -142,10 +145,10 @@ public class TacheDAOImpl implements TacheDAO{
     }
 
     @Override
-    public List<Tache> findByCreateur(String Createur) {
+    public List<Tache> findByCreateur(Users Createur) {
         List<Tache> listTaches = new ArrayList<>();
         try {
-            ResultSet rs = st.executeQuery("select * from Tache where CREATEUR = '"+Createur+"'");
+            ResultSet rs = st.executeQuery("select * from Tache where ID_CREATEUR = "+Createur.getID()+"");
             //Mapping Occurrence to Object
             while(rs.next()) {
                 Tache tache = new Tache();
@@ -154,6 +157,8 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
+                tache.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
+                tache.setCREATEUR_EMAIL(new UsersDAOImpl().findById(tache.getID_CREATEUR()).getMAIL());
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
@@ -185,6 +190,8 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
+                tache.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
+                tache.setCREATEUR_EMAIL(new UsersDAOImpl().findById(tache.getID_CREATEUR()).getMAIL());
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles = new ArrayList<>();
                 listMaterielles = this.findAllMaterielles(tache);
@@ -216,6 +223,10 @@ public class TacheDAOImpl implements TacheDAO{
                     materielle.setTYPE(rs.getString("TYPE"));
                     materielle.setMARQUE(rs.getString("MARQUE"));
                     materielle.setETAT(rs.getString("ETAT"));
+
+                    Users gerantMaterielle = new UsersDAOImpl().findById(tache.getID_CREATEUR());
+                    materielle.setGERANT_EMAIL(gerantMaterielle.getMAIL());
+                    materielle.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
                     listMaterielles.add(materielle);
                 }
             }
@@ -227,6 +238,19 @@ public class TacheDAOImpl implements TacheDAO{
             System.out.println("[EXCEPTION TRIGGERED / SELECT-findAllTasks >  TacheDAOImpl.java ]-> " + e.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public Tache findByMaterielle(Materielle materielle) {
+        try {
+            ResultSet rs_materielles = st.executeQuery("select ID_TACHE from AssocTacheMaterielle where ID_MATERIELLE = " + materielle.getID());
+            Tache tache = this.findById(rs_materielles.getLong(1));
+            return tache;
+        }catch (SQLException e){
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByMaterielle >  TacheDAOImpl.java ]-> " + e.getMessage());
+            return null;
+        }
+
     }
 
     public List<Tache> findByProjet(Projet projet) {
@@ -241,6 +265,8 @@ public class TacheDAOImpl implements TacheDAO{
                 tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
                 tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 tache.setID_PROJET(rs.getLong("ID_PROJET"));
+                tache.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
+                tache.setCREATEUR_EMAIL(new UsersDAOImpl().findById(tache.getID_CREATEUR()).getMAIL());
                 //Partie de chargement des materielles utilisées par cette tache :
                 List<Materielle> listMaterielles;
                 listMaterielles = this.findAllMaterielles(tache);
@@ -255,6 +281,38 @@ public class TacheDAOImpl implements TacheDAO{
 
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / SELECT-findByEtat]-> " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Tache> findByDescription(String desc) {
+        List<Tache> listTaches = new ArrayList<>();
+        try {
+            ResultSet rs = st.executeQuery("select * from Tache where DESCRIPTION like '%"+desc+"%'");
+            //Mapping Occurrence to Object
+            while(rs.next()) {
+                Tache tache = new Tache();
+                tache.setID(rs.getLong("ID"));
+                tache.setETAT(rs.getString("ETAT"));
+                tache.setID_CREATEUR(rs.getLong("ID_CREATEUR"));
+                tache.setDESCRIPTION(rs.getString("DESCRIPTION"));
+                tache.setID_PROJET(rs.getLong("ID_PROJET"));
+                tache.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
+                tache.setCREATEUR_EMAIL(new UsersDAOImpl().findById(tache.getID_CREATEUR()).getMAIL());
+                //Partie de chargement des materielles utilisées par cette tache :
+                List<Materielle> listMaterielles = new ArrayList<>();
+                listMaterielles = this.findAllMaterielles(tache);
+
+                tache.setListmaterielles(listMaterielles);
+                listTaches.add(tache);
+            }
+            if (listTaches.isEmpty()) {
+                System.out.println("[INFO]-> The Task TABLE IS EMPTY !!");
+            }
+            return listTaches;
+
+        } catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / SELECT-findByDesc]-> " + e.getMessage());
             return null;
         }
     }

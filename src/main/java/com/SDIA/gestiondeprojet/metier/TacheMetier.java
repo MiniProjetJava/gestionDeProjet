@@ -3,6 +3,7 @@ package com.SDIA.gestiondeprojet.metier;
 import com.SDIA.gestiondeprojet.dao.entities.Materielle;
 import com.SDIA.gestiondeprojet.dao.entities.Projet;
 import com.SDIA.gestiondeprojet.dao.entities.Tache;
+import com.SDIA.gestiondeprojet.dao.entities.Users;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,11 +20,12 @@ import java.util.List;
 
      void delete(Tache tache) throws SQLException;
 
-     List<Tache> selectTacheByCreateur(String Createur);
+     List<Tache> selectTacheByCreateur(Users Createur);
 
      List<Tache> selectTacheByEtat(String Etat);
 
      List<Materielle> selectMateriellesDeTache(Tache tache);
 
      List<Tache> selectTacheByProjet(Projet projet);
+     List<Tache> selectTacheByDesc(String desc);
 }

@@ -10,8 +10,9 @@ public interface AssocTacheMaterielleDAO extends DAO<AssocTacheMaterielle> {
 
     List<AssocTacheMaterielle> findByMaterielle(Materielle materielle);
 
-    List<AssocTacheMaterielle> findByTache(Tache tache);
+    Long findByTacheMaterielle(Tache tache, Materielle materielle);
 
+    List<AssocTacheMaterielle> findByTache(Tache tache);
     public void save(Tache tache, Materielle materielle);
     public void delete(Tache tache, Materielle materielle);
 }

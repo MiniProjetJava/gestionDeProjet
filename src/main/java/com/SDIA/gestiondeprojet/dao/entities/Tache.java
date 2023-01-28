@@ -11,7 +11,26 @@ public class Tache implements Serializable {
 
     private long ID_PROJET;
 
+    private String PROJET_DESCRIPTION;
+    private String CREATEUR_EMAIL;
+
     private List<Materielle> listmaterielles;
+
+    public String getCREATEUR_EMAIL() {
+        return CREATEUR_EMAIL;
+    }
+
+    public void setCREATEUR_EMAIL(String CREATEUR_EMAIL) {
+        this.CREATEUR_EMAIL = CREATEUR_EMAIL;
+    }
+
+    public String getPROJET_DESCRIPTION() {
+        return PROJET_DESCRIPTION;
+    }
+
+    public void setPROJET_DESCRIPTION(String PROJET_DESCRIPTION) {
+        this.PROJET_DESCRIPTION = PROJET_DESCRIPTION;
+    }
 
     public long getID_PROJET() {
         return ID_PROJET;
