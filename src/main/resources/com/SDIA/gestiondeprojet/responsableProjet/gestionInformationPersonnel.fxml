@@ -40,15 +40,19 @@
          </children>
       </GridPane>
    </center>
-   <bottom>
-      <Button mnemonicParsing="false" onAction="#editInfo" text="Modifier" BorderPane.alignment="CENTER" />
-   </bottom>
    <top>
-      <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="ID : " />
             <Label fx:id="id" />
          </children>
       </HBox>
    </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#editInfo" text="Modifier" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

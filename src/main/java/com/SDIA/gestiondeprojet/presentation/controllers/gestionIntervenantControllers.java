@@ -119,30 +119,6 @@ public class gestionIntervenantControllers implements Initializable {
 
     }
 
-    @FXML
-    void EnregistrerIntervenant(ActionEvent event) throws SQLException {
-        //int id = (int) ModifierIntervenant(event);
-
-        String nom_text = nom.getText();
-        String prenom_text = prenom.getText();
-        String adresse_text = adresse.getText();
-        String mail_text = mail.getText();
-        String telephone_text = telephone.getText();
-        String password_text = password.getText();
-        /*Users users = new Users(nom_text, prenom_text,adresse_text,mail_text,telephone_text,password_text, "Intervenant");
-
-        System.out.println(users);
-        new UsersMetier().update(users);
-        loadIntervenant();*/
-
-        nom.setText("");
-        prenom.setText("");
-        adresse.setText("");
-        mail.setText("");
-        telephone.setText("");
-        password.setText("");
-
-    }
 
     @FXML
     void ModifierIntervenant(ActionEvent event) throws SQLException {
@@ -187,7 +163,6 @@ public class gestionIntervenantControllers implements Initializable {
             alert.setHeaderText("ERROR : there is no selected product from the table below.");
             alert.setContentText("Solution : Please try to select a product and then press the button [Update].");
             Optional<ButtonType> result = alert.showAndWait();
-            //if(optional.get()==ButtonType.OK) {
 
         }
 

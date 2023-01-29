@@ -68,7 +68,6 @@ public class LoginControllers implements Initializable {
                 Stage stage = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("Intervenant/intervenantAcceuil.fxml"));
 
-
                 Scene scene = new Scene(fxmlLoader.load(), 600, 600);
                 stage.setTitle("Intervenant");
                 stage.setScene(scene);
