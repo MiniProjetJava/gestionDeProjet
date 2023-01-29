@@ -287,7 +287,7 @@ public class UsersDAOImpl implements UsersDAO{
 
     public List<Projet> findAllProjects(Users responsable) {
         try {
-            List<Projet> listProjets = new ProjetDAOImpl().findByResponsable(responsable);
+            List<Projet> listProjets = new ProjetDAOImpl().findByResponsable(responsable.getID());
             return listProjets;
 
         }catch (SQLException e) {

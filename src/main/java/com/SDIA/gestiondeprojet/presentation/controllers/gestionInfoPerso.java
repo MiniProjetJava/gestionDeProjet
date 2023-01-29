@@ -30,7 +30,6 @@ public class gestionInfoPerso implements Initializable {
     @FXML
     private Label id;
 
-
     SingletonData data = SingletonData.getInstance();
 
     public gestionInfoPerso() {

@@ -2,7 +2,6 @@ package com.SDIA.gestiondeprojet.dao;
 
 import com.SDIA.gestiondeprojet.dao.entities.*;
 import com.SDIA.gestiondeprojet.dao.entities.Projet;
-import com.SDIA.gestiondeprojet.dao.entities.Projet;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -58,6 +57,7 @@ public class ProjetDAOImpl implements ProjetDAO{
             //Mapping Occurrence to Object
             if(rs.next()) {
                 projet.setID(rs.getLong("ID"));
+                projet.setNOM(rs.getString("NOM"));
                 projet.setETAT(rs.getString("ETAT"));
                 projet.setID_RESPONSABLE(rs.getLong("ID_RESPONSABLE"));
                 projet.setDESCRIPTION(rs.getString("DESCRIPTION"));
@@ -76,40 +76,31 @@ public class ProjetDAOImpl implements ProjetDAO{
     }
 
     @Override
-    public boolean update(Projet Element){
-        try {
-            int AffectedRow = st.executeUpdate("update Projet " +
-                    "set DESCRIPTION = '" + Element.getDESCRIPTION() + "', " +
-                    "NBR_INTERVENANTS = " + Element.getNBR_INTERVENANTS() + " " +
-                    "ETAT = '" + Element.getETAT() + "' " +
+    public boolean update(Projet Element) throws SQLException {
+        PreparedStatement pst = connection.prepareStatement("update projet set NOM=?, DESCRIPTION=?, ETAT=?, NBR_INTERVENANTS=? where ID=?");
+        pst.setString(1, Element.getNOM());
+        pst.setString(2, Element.getDESCRIPTION());
+        pst.setString(3, Element.getETAT());
+        pst.setInt(4, Element.getNBR_INTERVENANTS());
+        pst.setLong(5, Element.getID());
 
-                    "where ID = " + Element.getID());
+        pst.executeUpdate();
 
-            if (AffectedRow > 0) {
-                System.out.println("[INFO]-> The project identified by [ID: " + Element.getID() + "| ID_RESPONSABLE: " + Element.getID_RESPONSABLE() + "] has been updated successfully!");
-                return true;
-            } else {
-                System.out.println("[INFO]-> The project identified by [ID: " + Element.getID() + "| ID_RESPONSABLE: " + Element.getID_RESPONSABLE() + "] is not updated in the project table!");
-                return false;
-            }
+        return true;
 
-    } catch (SQLException e) {
-        System.out.println("[EXCEPTION TRIGGERED / UPDATE-Project]-> " + e.getMessage());
-        return false;
-
-    }
 }
 
     @Override
     public void save(Projet Element) {
         try {
-            PreparedStatement ps = connection.prepareStatement("insert into Materielle " +
-                    "values(null, ?, ?, ?)");
+            PreparedStatement ps = connection.prepareStatement("insert into projet(NOM, ETAT, ID_RESPONSABLE,DESCRIPTION,NBR_INTERVENANTS) " +
+                    "values(?, ?, ?, ?,?)");
 
-            ps.setString(1, Element.getETAT());
-            ps.setLong(2, Element.getID_RESPONSABLE());
-            ps.setString(3, Element.getDESCRIPTION());
-            ps.setInt(4, Element.getNBR_INTERVENANTS());
+            ps.setString(1, Element.getNOM());
+            ps.setString(2, Element.getETAT());
+            ps.setLong(3, Element.getID_RESPONSABLE());
+            ps.setString(4, Element.getDESCRIPTION());
+            ps.setInt(5, Element.getNBR_INTERVENANTS());
             int AffectedRow = ps.executeUpdate();
 
             if (AffectedRow > 0) {
@@ -124,7 +115,7 @@ public class ProjetDAOImpl implements ProjetDAO{
     @Override
     public void delete(Projet p) {
         try {
-            int AffectedRow = st.executeUpdate("delete from Projet where ID = "+p.getID());
+            int AffectedRow = st.executeUpdate("delete from projet where ID = "+p.getID());
 
             if (AffectedRow > 0) {
                 System.out.println("[INFO]-> the project [ID: " + p.getID() + "| ID_RESPONSABLE: " + p.getID_RESPONSABLE() + "] has been deleted successfully from table Project !");
@@ -154,14 +145,15 @@ public class ProjetDAOImpl implements ProjetDAO{
     }
 
     @Override
-    public List<Projet> findByResponsable(Users responsable) {
+    public List<Projet> findByResponsable(long id) {
         try {
             List<Projet> listProjets = new ArrayList<>();
-            ResultSet rs = st.executeQuery("select * from Projet where ID_RESPONSABLE = "+responsable.getID());
+            ResultSet rs = st.executeQuery("select * from Projet where ID_RESPONSABLE = "+id);
             //Mapping Occurrence to Object
             while(rs.next()) {
                 Projet projet = new Projet();
                 projet.setID(rs.getLong("ID"));
+                projet.setNOM(rs.getString("NOM"));
                 projet.setETAT(rs.getString("ETAT"));
                 projet.setID_RESPONSABLE(rs.getLong("ID_RESPONSABLE"));
                 projet.setDESCRIPTION(rs.getString("DESCRIPTION"));
@@ -171,7 +163,7 @@ public class ProjetDAOImpl implements ProjetDAO{
             }
 
             if(listProjets.isEmpty()){
-                System.out.println("[INFO]-> The project identified by ID_RESPONSABLE: ' " + responsable.getID() + " ' doesn't exist in the Projet table!");
+                System.out.println("[INFO]-> The project identified by ID_RESPONSABLE: ' " + id + " ' doesn't exist in the Projet table!");
             }
             return listProjets;
 
@@ -179,5 +171,31 @@ public class ProjetDAOImpl implements ProjetDAO{
             System.out.println("[EXCEPTION TRIGGERED / SELECT-findAll() > ProjetDAOImpl.class]-> " + e.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public List<Projet> findByMotCle(long id, String mot) throws SQLException {
+        PreparedStatement pst = connection.prepareStatement("select * from projet where ID_RESPONSABLE = ? and NOM like ? or DESCRIPTION like ? ");
+
+        pst.setLong(1, id);
+        pst.setString(2, "%"+mot+"%");
+        pst.setString(3, "%"+mot+"%");
+
+        ResultSet rs = pst.executeQuery();
+
+        List<Projet> projets = new ArrayList<>();
+
+        while (rs.next()){
+            Projet projet = new Projet();
+            projet.setID(rs.getLong("ID"));
+            projet.setNOM(rs.getString("NOM"));
+            projet.setDESCRIPTION(rs.getString("DESCRIPTION"));
+            projet.setETAT(rs.getString("ETAT"));
+            projet.setNBR_INTERVENANTS(rs.getInt("NBR_INTERVENANTS"));
+
+            projets.add(projet);
+
+        }
+        return projets;
     }
 }

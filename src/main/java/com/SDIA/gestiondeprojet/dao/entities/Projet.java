@@ -7,10 +7,22 @@ import java.util.List;
 public class Projet implements Serializable {
 
     private long ID;
+    private String NOM;
     private  String ETAT;
     private long ID_RESPONSABLE;
     private String DESCRIPTION;
     private int NBR_INTERVENANTS;
+
+    public Projet() {
+    }
+
+    public Projet(String NOM, String ETAT, long ID_RESPONSABLE, String DESCRIPTION, int NBR_INTERVENANTS) {
+        this.NOM = NOM;
+        this.ETAT = ETAT;
+        this.ID_RESPONSABLE = ID_RESPONSABLE;
+        this.DESCRIPTION = DESCRIPTION;
+        this.NBR_INTERVENANTS = NBR_INTERVENANTS;
+    }
 
     public String getETAT() {
         return ETAT;
@@ -26,6 +38,15 @@ public class Projet implements Serializable {
 
     public void setID(long ID) {
         this.ID = ID;
+    }
+
+    public String getNOM() {
+        return NOM;
+    }
+
+
+    public void setNOM(String NOM) {
+        this.NOM = NOM;
     }
 
     public long getID_RESPONSABLE() {

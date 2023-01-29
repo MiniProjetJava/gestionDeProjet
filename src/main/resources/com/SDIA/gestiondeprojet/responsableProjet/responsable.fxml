@@ -18,7 +18,7 @@
                 <content>
                   <fx:include source="gestionInformationPersonnel.fxml" />
 
-                  <fx:include source="gestionInformationPersonnel.fxml"/>
+                  <fx:include source="gestionInformationPersonnel.fxml" />
 
                 </content>
               </Tab>
@@ -27,9 +27,9 @@
                     <fx:include source="gestionTACHES.fxml" />
                 </content>
                 </Tab>
-            <Tab text="Déconnexion">
+            <Tab text="Gestion de projet">
               <content>
-                <fx:include source="../deconnexion.fxml"/>
+                  <fx:include source="gestionProjet.fxml"/>
               </content>
             </Tab>
         </tabs>
