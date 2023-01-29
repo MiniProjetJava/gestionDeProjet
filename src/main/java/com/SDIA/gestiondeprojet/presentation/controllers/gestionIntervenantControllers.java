@@ -119,7 +119,6 @@ public class gestionIntervenantControllers implements Initializable {
 
     }
 
-
     @FXML
     void ModifierIntervenant(ActionEvent event) throws SQLException {
         Users users = tableViewIntervenant.getSelectionModel().getSelectedItem();

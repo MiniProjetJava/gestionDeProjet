@@ -32,7 +32,7 @@ public class UsersDAOImpl implements UsersDAO{
                 user.setNOM(rs.getString("NOM"));
                 user.setPRENOM(rs.getString("PRENOM"));
                 user.setADRESSE(rs.getString("ADRESSE"));
-                user.setMAIL(rs.getString("EMAIL"));
+                user.setMAIL(rs.getString("MAIL"));
                 user.setTELEPHONE(rs.getString("TELEPHONE"));
                 user.setPASSWORD(rs.getString("PASSWORD"));
                 user.setROLE(rs.getString("ROLE"));
@@ -61,7 +61,7 @@ public class UsersDAOImpl implements UsersDAO{
                 user.setNOM(rs.getString("NOM"));
                 user.setPRENOM(rs.getString("PRENOM"));
                 user.setADRESSE(rs.getString("ADRESSE"));
-                user.setMAIL(rs.getString("EMAIL"));
+                user.setMAIL(rs.getString("MAIL"));
                 user.setTELEPHONE(rs.getString("TELEPHONE"));
                 user.setPASSWORD(rs.getString("PASSWORD"));
                 user.setROLE(rs.getString("ROLE"));
@@ -189,7 +189,7 @@ public class UsersDAOImpl implements UsersDAO{
                     user.setNOM(rs.getString("NOM"));
                     user.setPRENOM(rs.getString("PRENOM"));
                     user.setADRESSE(rs.getString("ADRESSE"));
-                    user.setMAIL(rs.getString("EMAIL"));
+                    user.setMAIL(rs.getString("MAIL"));
                     user.setTELEPHONE(rs.getString("TELEPHONE"));
                     user.setPASSWORD(rs.getString("PASSWORD"));
                     user.setROLE(rs.getString("ROLE"));
@@ -285,7 +285,7 @@ public class UsersDAOImpl implements UsersDAO{
         return null;
     }
 
-    public List<Projet> findAllProjects(Responsable responsable) {
+    public List<Projet> findAllProjects(Users responsable) {
         try {
             List<Projet> listProjets = new ProjetDAOImpl().findByResponsable(responsable);
             return listProjets;

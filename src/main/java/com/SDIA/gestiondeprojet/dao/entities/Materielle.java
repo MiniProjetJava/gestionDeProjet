@@ -9,7 +9,27 @@ public class Materielle implements Serializable {
     private String TYPE; //PC , Laptop , Souris, Imprimante, ..etc
     private String MARQUE;
     private String ETAT; //En service, En panne, Hors service
+
+    private String PROJET_DESCRIPTION;
+
+    private String GERANT_EMAIL;
     private List<Tache> listTaches;
+
+    public String getPROJET_DESCRIPTION() {
+        return PROJET_DESCRIPTION;
+    }
+
+    public void setPROJET_DESCRIPTION(String PROJET_DESCRIPTION) {
+        this.PROJET_DESCRIPTION = PROJET_DESCRIPTION;
+    }
+
+    public String getGERANT_EMAIL() {
+        return GERANT_EMAIL;
+    }
+
+    public void setGERANT_EMAIL(String GERANT_EMAIL) {
+        this.GERANT_EMAIL = GERANT_EMAIL;
+    }
 
     public long getID() {
         return ID;

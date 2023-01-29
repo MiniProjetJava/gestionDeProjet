@@ -8,6 +8,16 @@ public class AssocTacheMaterielle implements Serializable {
     private long ID_TACHE;
     private long ID_MATERIELLE;
 
+    private Long ID_GERANT;
+
+    public Long getID_GERANT() {
+        return ID_GERANT;
+    }
+
+    public void setID_GERANT(Long ID_GERANT) {
+        this.ID_GERANT = ID_GERANT;
+    }
+
     public long getID() {
         return ID;
     }

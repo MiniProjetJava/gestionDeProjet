@@ -13,8 +13,8 @@ public interface UsersDAO extends DAO <Users>{
     List<Users> findAllIntervenant() throws SQLException;
     List<Users> findAllResponsable();
 
-    List<Tache> findAllTasks(Users user);
+    List<Tache> findAllTasks(Users user); //pour les "Responsable" et "Intervenant"
 
-    List<Projet> findAllProjects(Responsable responsable);
+    List<Projet> findAllProjects(Users responsable); //Pour l'utilisateur avec le role "Responsable"
 
 }

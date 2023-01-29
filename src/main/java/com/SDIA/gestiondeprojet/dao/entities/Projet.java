@@ -54,12 +54,10 @@ public class Projet implements Serializable {
 
     @Override
     public String toString() {
-        return "Projet{ " +
-                "ID=" + ID +
-                ", ETAT=" + ETAT +
-                ", ID_RESPONSABLE=" + ID_RESPONSABLE +
-                ", DESCRIPTION='" + DESCRIPTION + '\'' +
-                ", NBR_INTERVENANTS=" + NBR_INTERVENANTS +
-                '}';
+        return  DESCRIPTION + " |" +
+                " 'ETAT': " + ETAT + " |" +
+                " 'ID_RESPONSABLE': " + ID_RESPONSABLE + " |" +
+                " 'NBR_INTERVENANTS': " + NBR_INTERVENANTS;
     }
 }
+

@@ -1,8 +1,7 @@
 package com.SDIA.gestiondeprojet.dao;
 
+import com.SDIA.gestiondeprojet.dao.entities.*;
 import com.SDIA.gestiondeprojet.dao.entities.Materielle;
-import com.SDIA.gestiondeprojet.dao.entities.Materielle;
-import com.SDIA.gestiondeprojet.dao.entities.Tache;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,6 +31,11 @@ public class MaterielleDAOImpl implements MaterielleDAO {
                 materielle.setTYPE(rs.getString("TYPE"));
                 materielle.setMARQUE(rs.getString("MARQUE"));
                 materielle.setETAT(rs.getString("ETAT"));
+                //new add v1.0
+                Tache tache = new TacheDAOImpl().findByMaterielle(materielle);
+                Users gerantMaterielle = new UsersDAOImpl().findById(new AssocTacheMaterielleDAOImpl().findByTacheMaterielle(tache , materielle));
+                materielle.setGERANT_EMAIL(gerantMaterielle.getMAIL());
+                materielle.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
                 //Partie de chargement des taches utilisant ce materiel :
                 List<Tache> listTaches = new ArrayList<>();
                 listTaches = this.findAllTasks(materielle);
@@ -60,6 +64,11 @@ public class MaterielleDAOImpl implements MaterielleDAO {
                 materielle.setTYPE(rs.getString("TYPE"));
                 materielle.setMARQUE(rs.getString("MARQUE"));
                 materielle.setETAT(rs.getString("ETAT"));
+                //new add v1.0
+                Tache tache = new TacheDAOImpl().findByMaterielle(materielle);
+                Users gerantMaterielle = new UsersDAOImpl().findById(new AssocTacheMaterielleDAOImpl().findByTacheMaterielle(tache , materielle));
+                materielle.setGERANT_EMAIL(gerantMaterielle.getMAIL());
+                materielle.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
                 //Partie de chargement des taches utilisant ce materiel :
                 List<Tache> listTaches = new ArrayList<>();
                 listTaches = this.findAllTasks(materielle);
@@ -158,6 +167,11 @@ public class MaterielleDAOImpl implements MaterielleDAO {
                 materielle.setTYPE(rs.getString("TYPE"));
                 materielle.setMARQUE(rs.getString("MARQUE"));
                 materielle.setETAT(rs.getString("ETAT"));
+                //new add v1.0
+                Tache tache = new TacheDAOImpl().findByMaterielle(materielle);
+                Users gerantMaterielle = new UsersDAOImpl().findById(new AssocTacheMaterielleDAOImpl().findByTacheMaterielle(tache , materielle));
+                materielle.setGERANT_EMAIL(gerantMaterielle.getMAIL());
+                materielle.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
                 //Partie de chargement des taches utilisant ce materiel :
                 List<Tache> listTaches = new ArrayList<>();
                 listTaches = this.findAllTasks(materielle);
@@ -187,6 +201,11 @@ public class MaterielleDAOImpl implements MaterielleDAO {
                 materielle.setTYPE(rs.getString("TYPE"));
                 materielle.setMARQUE(rs.getString("MARQUE"));
                 materielle.setETAT(rs.getString("ETAT"));
+                //new add v1.0
+                Tache tache = new TacheDAOImpl().findByMaterielle(materielle);
+                Users gerantMaterielle = new UsersDAOImpl().findById(new AssocTacheMaterielleDAOImpl().findByTacheMaterielle(tache , materielle));
+                materielle.setGERANT_EMAIL(gerantMaterielle.getMAIL());
+                materielle.setPROJET_DESCRIPTION(new ProjetDAOImpl().findById(tache.getID_PROJET()).getDESCRIPTION());
                 //Partie de chargement des taches utilisant ce materiel :
                 List<Tache> listTaches = new ArrayList<>();
                 listTaches = this.findAllTasks(materielle);

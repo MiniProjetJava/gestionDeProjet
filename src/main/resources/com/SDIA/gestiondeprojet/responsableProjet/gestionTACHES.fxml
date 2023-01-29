@@ -24,18 +24,18 @@
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
                   <GridPane prefHeight="77.0" prefWidth="830.0" vgap="38.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="56.8" minHeight="10.0" prefHeight="22.4" vgrow="SOMETIMES" />
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="56.8" minHeight="10.0" prefHeight="22.4" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="60.79999999999999" minHeight="0.0" prefHeight="34.4" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="60.79999999999999" minHeight="0.0" prefHeight="34.4" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="60.79999999999999" minHeight="10.0" prefHeight="34.4" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                     </rowConstraints>
                      <children>
-                        <Label text="ETAT">
+                        <Label fx:id="labelEtat" text="ETAT">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
@@ -56,7 +56,10 @@
                               <Insets left="10.0" top="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <ComboBox fx:id="comboBoxProjet" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="comboBoxProjet" prefHeight="26.0" prefWidth="411.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin></ComboBox>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
@@ -67,29 +70,29 @@
          </top>
          <bottom>
             <TableView fx:id="tableTache" prefHeight="423.0" prefWidth="830.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="col_ID" prefWidth="75.0" resizable="false" text="ID" />
-                <TableColumn fx:id="col_ETAT" minWidth="200.0" prefWidth="75.0" resizable="false" text="ETAT" />
-                  <TableColumn fx:id="col_ID_CREATEUR" minWidth="90.0" prefWidth="75.0" resizable="false" text="ID_CREATEUR" />
-                  <TableColumn fx:id="col_DESCRIPTION" minWidth="375.0" prefWidth="75.0" resizable="false" text="DESCRIPTION" />
-                  <TableColumn fx:id="col_ID_PROJET" minWidth="90.0" prefWidth="0.0" resizable="false" text="ID_PROJET" />
-              </columns>
+               <columns>
+                  <TableColumn fx:id="col_ID" prefWidth="36.000030517578125" resizable="false" text="ID" />
+                  <TableColumn fx:id="col_ETAT" minWidth="123.20001220703125" prefWidth="138.39999389648438" resizable="false" text="ETAT" />
+                  <TableColumn fx:id="col_ID_CREATEUR" minWidth="90.0" prefWidth="164.800048828125" resizable="false" text="CREATEUR EMAIL" />
+                  <TableColumn fx:id="col_DESCRIPTION" minWidth="258.40008544921875" prefWidth="278.40008544921875" resizable="false" text="DESCRIPTION" />
+                  <TableColumn fx:id="col_ID_PROJET" minWidth="90.0" prefWidth="216.0" resizable="false" text="PROJET DESC" />
+               </columns>
             </TableView>
          </bottom>
          <center>
             <HBox prefHeight="100.0" prefWidth="830.0" spacing="80.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="14.0" prefWidth="98.0" text="Add">
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addTache" prefHeight="14.0" prefWidth="98.0" text="Add">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="updateBtn" mnemonicParsing="false" prefHeight="14.0" prefWidth="98.0" text="Update">
+                  <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#updateTache" prefHeight="14.0" prefWidth="98.0" text="Update">
                      <HBox.margin>
                         <Insets left="-20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="deleteBtn" mnemonicParsing="false" prefWidth="98.0" text="Remove">
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteTache" prefWidth="98.0" text="Remove">
                      <HBox.margin>
                         <Insets left="-23.0" />
                      </HBox.margin>

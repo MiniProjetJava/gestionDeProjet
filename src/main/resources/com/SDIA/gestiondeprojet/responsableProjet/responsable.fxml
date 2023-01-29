@@ -17,6 +17,9 @@
               <Tab text="Gestion des informations personnelles">
                 <content>
                   <fx:include source="gestionInformationPersonnel.fxml" />
+
+                  <fx:include source="gestionInformationPersonnel.fxml"/>
+
                 </content>
               </Tab>
                 <Tab text="Gestion des taches">
