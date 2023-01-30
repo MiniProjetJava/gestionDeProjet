@@ -102,8 +102,7 @@ public class gestionTacheControllers implements Initializable {
                         tacheEtat.setText(newObject.getETAT());
                         tacheDesc.setText(newObject.getDESCRIPTION());
                         //pour charger comBox
-                        comboBoxProjet.setPromptText(projetMetier.selectByID(newObject.getID_PROJET()).getDESCRIPTION());
-
+                        comboBoxProjet.setValue(projetMetier.selectByID(newObject.getID_PROJET()));
                     }
                 }
             }
@@ -113,7 +112,7 @@ public class gestionTacheControllers implements Initializable {
 
     public void addTache() {
 
-        if (comboBoxProjet.getSelectionModel().getSelectedItem() == null || tacheEtat.getText().isEmpty() || tacheDesc.getText().isEmpty()) {
+        if (comboBoxProjet.getValue() == null || tacheEtat.getText().isEmpty() || tacheDesc.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR MESSAGE");
             alert.setHeaderText("ERROR : the fields of 'ETAT', 'DESCRIPTION' and 'Projet' are empty.");
@@ -124,7 +123,7 @@ public class gestionTacheControllers implements Initializable {
             tache.setETAT(tacheEtat.getText());
             tache.setDESCRIPTION(tacheDesc.getText());
             tache.setID_CREATEUR(responsable.getID());  //Charger ID_CREATEUR de cette tache qui est le responsable de projet
-            Projet projet = comboBoxProjet.getSelectionModel().getSelectedItem();
+            Projet projet = comboBoxProjet.getValue();
             tache.setID_PROJET(projet.getID());
 
             tacheMetier.insertTache(tache);
@@ -132,7 +131,6 @@ public class gestionTacheControllers implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ADD MESSAGE");
-
             alert.setContentText("You have successfully added new task");
             alert.show();
         }
@@ -141,7 +139,7 @@ public class gestionTacheControllers implements Initializable {
 
     public void updateTache() {
 
-        if (comboBoxProjet.getSelectionModel().getSelectedItem() == null || tacheEtat.getText().isEmpty() || tacheDesc.getText().isEmpty()) {
+        if (tacheEtat.getText().isEmpty() || tacheDesc.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR MESSAGE");
             alert.setHeaderText("ERROR : the fields of 'ETAT', 'DESCRIPTION' and 'Projet' are empty.");
@@ -151,6 +149,7 @@ public class gestionTacheControllers implements Initializable {
             Tache tache = tableTache.getSelectionModel().getSelectedItem();
             tache.setETAT(tacheEtat.getText());
             tache.setDESCRIPTION(tacheDesc.getText());
+            tache.setID_PROJET(comboBoxProjet.getValue().getID());
             //tache.setID_CREATEUR(responsable.getID());  //Charger ID_CREATEUR de cette tache qui est le responsable de projet
 
             try {
@@ -197,6 +196,11 @@ public class gestionTacheControllers implements Initializable {
             }
         }
 
+    }
+
+    public void refreshTable(){
+        observableTache.clear();
+        observableTache.addAll(tacheMetier.selectAll());
     }
 }
 

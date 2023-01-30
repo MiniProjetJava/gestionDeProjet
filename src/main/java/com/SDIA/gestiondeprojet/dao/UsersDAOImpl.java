@@ -66,7 +66,7 @@ public class UsersDAOImpl implements UsersDAO{
                 user.setPASSWORD(rs.getString("PASSWORD"));
                 user.setROLE(rs.getString("ROLE"));
 
-                System.out.println("[INFO]-> The User identified by ID : " + X + " has been returned successfully!");
+                //System.out.println("[INFO]-> The User identified by ID : " + X + " has been returned successfully!");
             }
             else {
                 System.out.println("[INFO]-> The User identified by ID: ' " + X + " ' doesn't exist in the USERS table!");

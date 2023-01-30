@@ -73,12 +73,7 @@ public class Materielle implements Serializable {
 
     @Override
     public String toString() {
-        return "Materielle{ " +
-                "ID=" + ID +
-                ", TYPE='" + TYPE + '\'' +
-                ", MARQUE='" + MARQUE + '\'' +
-                ", ETAT='" + ETAT + '\'' +
-                ", listTaches=" + listTaches +
-                '}';
+        return "TYPE= '" + TYPE + '\'' +
+                " | MARQUE='" + MARQUE + '\'';
     }
 }
