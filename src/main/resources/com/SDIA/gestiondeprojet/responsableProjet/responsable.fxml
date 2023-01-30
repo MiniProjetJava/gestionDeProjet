@@ -9,6 +9,12 @@
    <top>
       <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
+            <Tab text="Acceuil">
+                <content>
+                    <fx:include source="acceuilResponsable.fxml" />
+                </content>
+            </Tab>
+
               <Tab text="Gestion des intervenants">
                 <content>
                    <fx:include source="gestionIntervenantInterface.fxml" />
@@ -31,6 +37,12 @@
               <content>
                   <fx:include source="gestionProjet.fxml"/>
               </content>
+            </Tab>
+
+            <Tab text="Deconnexion">
+                <content>
+                    <fx:include source="./../deconnexion.fxml"/>
+                </content>
             </Tab>
         </tabs>
       </TabPane>

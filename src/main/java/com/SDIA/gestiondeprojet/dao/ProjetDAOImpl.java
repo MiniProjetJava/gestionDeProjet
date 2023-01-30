@@ -198,4 +198,20 @@ public class ProjetDAOImpl implements ProjetDAO{
         }
         return projets;
     }
+
+    @Override
+    public int nombreDeProjet(Users users) throws SQLException {
+        PreparedStatement pst = connection.prepareStatement("select count(*) as nombre from projet where ID_RESPONSABLE=? and ETAT=?");
+        pst.setLong(1, users.getID());
+        pst.setString(2, "En cours");
+        ResultSet rs =  pst.executeQuery();
+
+        int nombre = 0;
+        if (rs.next()){
+            nombre = rs.getInt("nombre");
+        }
+
+        return nombre;
+    }
+
 }
