@@ -1,11 +1,22 @@
 package com.SDIA.gestiondeprojet.dao.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class AssocTacheUser implements Serializable {
     private long ID;
     private long ID_TACHE;
     private long ID_USER;
+
+    private Date DEADLINE;
+
+    public Date getDEADLINE() {
+        return DEADLINE;
+    }
+
+    public void setDEADLINE(Date DEADLINE) {
+        this.DEADLINE = DEADLINE;
+    }
 
     public long getID() {
         return ID;
