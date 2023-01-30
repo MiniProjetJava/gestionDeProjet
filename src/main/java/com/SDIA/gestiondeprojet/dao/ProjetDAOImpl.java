@@ -32,6 +32,7 @@ public class ProjetDAOImpl implements ProjetDAO{
             while(rs.next()) {
                 Projet projet = new Projet();
                 projet.setID(rs.getLong("ID"));
+                projet.setNOM(rs.getString("NOM"));
                 projet.setID_RESPONSABLE(rs.getLong("ID_RESPONSABLE"));
                 projet.setDESCRIPTION(rs.getString("DESCRIPTION"));
                 projet.setNBR_INTERVENANTS(rs.getInt("ID_RESPONSABLE"));

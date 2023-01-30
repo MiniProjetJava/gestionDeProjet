@@ -72,7 +72,7 @@ public class TacheDAOImpl implements TacheDAO{
 
                 tache.setListmaterielles(listMaterielles);
 
-                System.out.println("[INFO]-> The task identified by ID : " + X + " has been returned successfully!");
+                //System.out.println("[INFO]-> The task identified by ID : " + X + " has been returned successfully!");
             }
             else {
                 System.out.println("[INFO]-> The task identified by ID: ' " + X + " ' doesn't exist in the TacheS table!");
@@ -244,13 +244,15 @@ public class TacheDAOImpl implements TacheDAO{
     public Tache findByMaterielle(Materielle materielle) {
         try {
             ResultSet rs_materielles = st.executeQuery("select ID_TACHE from AssocTacheMaterielle where ID_MATERIELLE = " + materielle.getID());
-            Tache tache = this.findById(rs_materielles.getLong(1));
-            return tache;
+            if(rs_materielles.next()) {
+                Tache tache = this.findById(rs_materielles.getLong(1));
+                return tache;
+            }
         }catch (SQLException e){
             System.out.println("[EXCEPTION TRIGGERED / SELECT-findByMaterielle >  TacheDAOImpl.java ]-> " + e.getMessage());
             return null;
         }
-
+        return null;
     }
 
     public List<Tache> findByProjet(Projet projet) {

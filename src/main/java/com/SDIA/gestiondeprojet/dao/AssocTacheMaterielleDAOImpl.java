@@ -102,6 +102,10 @@ public class AssocTacheMaterielleDAOImpl implements AssocTacheMaterielleDAO{
                 ATM.setID_MATERIELLE(rs.getLong("ID_MATERIELLE"));
                 ATM.setID_TACHE(rs.getLong("ID_TACHE"));
                 ATM.setID_GERANT(rs.getLong("ID_GERANT"));
+                //Ajout de tache
+                ATM.setTache(new TacheDAOImpl().findById(ATM.getID_TACHE()));
+                //Ajout de materielle
+                ATM.setMaterielle(new MaterielleDAOImpl().findById(ATM.getID_MATERIELLE()));
 
                 listTaMa.add(ATM);
             }
@@ -127,6 +131,8 @@ public class AssocTacheMaterielleDAOImpl implements AssocTacheMaterielleDAO{
                 ATM.setID_MATERIELLE(rs.getLong("ID_MATERIELLE"));
                 ATM.setID_TACHE(rs.getLong("ID_TACHE"));
                 ATM.setID_GERANT(rs.getLong("ID_GERANT"));
+                ATM.setTache(new TacheDAOImpl().findById(ATM.getID_TACHE()));
+                ATM.setMaterielle(new MaterielleDAOImpl().findById(ATM.getID_MATERIELLE()));
             }
            else {
                 System.out.println("[INFO]-> The occurence  with ID+"+X+" doesn't exist in table AssocTacheMaterielle !!");
@@ -140,13 +146,31 @@ public class AssocTacheMaterielleDAOImpl implements AssocTacheMaterielleDAO{
     }
 
     @Override
-    public boolean update(AssocTacheMaterielle Element) {
-        return false;
+    public boolean update(AssocTacheMaterielle ATM) {
+        try {
+            int AffectedRow = st.executeUpdate("update AssocTacheMaterielle " +
+                    "set ID_MATERIELLE = '" + ATM.getID_MATERIELLE()+ "' " +
+
+                    "where ID = " + ATM.getID());
+
+            if (AffectedRow > 0) {
+                System.out.println("[INFO]-> The material identified by [TYPE: " + ATM.getMaterielle().getTYPE() + "| ETAT: " + ATM.getMaterielle().getETAT() + "] has been updated successfully!");
+                return true;
+            } else {
+                System.out.println("[INFO]-> The material identified by [TYPE: " + ATM.getMaterielle().getTYPE() + "| ETAT: " + ATM.getMaterielle().getETAT() + "] is not updated in the materielle table!");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("[EXCEPTION TRIGGERED / UPDATE-User]-> " + e.getMessage());
+            return false;
+
+        }
     }
 
 
     @Override
-    public void save(Tache tache, Materielle materielle) {
+    public AssocTacheMaterielle save(Tache tache, Materielle materielle) {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into AssocTacheMaterielle " +
                     "values(null, ?, ? ,?)");
@@ -158,24 +182,26 @@ public class AssocTacheMaterielleDAOImpl implements AssocTacheMaterielleDAO{
 
             if (AffectedRow > 0) {
                 System.out.println("[INFO]-> the new occurence  [ID_TACHE: " + tache.getID() + "| ID_MATERIELLE: " + materielle.getID() + "] has been inserted successfully in table AssocTacheMaterielle !");
+                long ID_Row = this.findByTacheMaterielle(tache, materielle);
+                AssocTacheMaterielle assTaMa = this.findById(ID_Row);
+                return assTaMa;
             }
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / INSERT > AssocTacheMaterielleDAOImpl]-> " + e.getMessage());
         }
-
+            return null;
     }
 
     @Override
-    public void delete(Tache tache, Materielle materielle) {
+    public void delete(AssocTacheMaterielle Element) {
         try {
             PreparedStatement ps = connection.prepareStatement("delete from AssocTacheMaterielle " +
-                    "where ID_TACHE = "+tache.getID()+" "+
-                    "and ID_MATERIELLE = "+materielle.getID()+"");
+                    "where ID = "+Element.getID());
 
             int AffectedRow = ps.executeUpdate();
 
             if (AffectedRow > 0) {
-                System.out.println("[INFO]-> the old occurence  [ID_TACHE: " + tache.getID() + "| ID_MATERIELLE: " + materielle.getID() + "] has been deleted successfully from table AssocTacheMaterielle !");
+                System.out.println("[INFO]-> the old occurence  [ID_TACHE: " + Element.getID_TACHE() + "| ID_MATERIELLE: " + Element.getID_MATERIELLE() + "] has been deleted successfully from table AssocTacheMaterielle !");
             }
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / INSERT > AssocTacheMaterielleDAOImpl]-> " + e.getMessage());
@@ -188,8 +214,4 @@ public class AssocTacheMaterielleDAOImpl implements AssocTacheMaterielleDAO{
 
     }
 
-    @Override
-    public void delete(AssocTacheMaterielle p) {
-
-    }
 }

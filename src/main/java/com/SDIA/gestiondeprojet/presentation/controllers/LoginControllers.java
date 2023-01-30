@@ -45,29 +45,20 @@ public class LoginControllers implements Initializable {
             Users user = new Users(mail_text, password_text);
             UsersMetier usersMetier = new UsersMetier();
 
+            borderPaneLOGIN.getScene().getWindow().hide();
+            String mail = email.getText();
+            SingletonData data = SingletonData.getInstance();
+            data.setMail(mail);
+            Stage stage = new Stage();
+            String resource;
             if (usersMetier.checkUsers(user) == 1) {
-                borderPaneLOGIN.getScene().getWindow().hide();
-                String mail = email.getText();
-                SingletonData data = SingletonData.getInstance();
-                data.setMail(mail);
-
-                Stage stage = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("responsableProjet/responsable.fxml"));
-
-
                 Scene scene = new Scene(fxmlLoader.load(), 600, 600);
                 stage.setTitle("Responsable");
                 stage.setScene(scene);
                 stage.show();
             } else if (usersMetier.checkUsers(user) == 2) {
-                borderPaneLOGIN.getScene().getWindow().hide();
-                String mail = email.getText();
-                SingletonData data = SingletonData.getInstance();
-                data.setMail(mail);
-
-                Stage stage = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("Intervenant/intervenantAcceuil.fxml"));
-
                 Scene scene = new Scene(fxmlLoader.load(), 600, 600);
                 stage.setTitle("Intervenant");
                 stage.setScene(scene);
@@ -83,7 +74,7 @@ public class LoginControllers implements Initializable {
     public void cancelButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("CONFIRMATION MESSAGE");
-        alert.setHeaderText("Are you sure you want to leave? Press [OK]");
+        alert.setHeaderText("Vous etes sur de se déconnecter? Press [OK]");
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == ButtonType.OK) {

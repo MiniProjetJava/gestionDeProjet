@@ -45,7 +45,7 @@ public class gestionInfoPerso implements Initializable {
             adresse.setText(users.getADRESSE());
             telephone.setText(users.getTELEPHONE());
             password.setText(users.getPASSWORD());
-            System.out.println(users);
+            //System.out.println(users);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -63,14 +63,13 @@ public class gestionInfoPerso implements Initializable {
         users.setPASSWORD(password.getText());
 
         Users user = new UsersMetier().findByMail(data.getMail());
-        long id = user.getID();
-        users.setID(id);
+        users.setID(user.getID());
 
         new UsersMetier().update(users);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("CONFIRMATION MESSAGE");
         alert.setHeaderText("");
-        alert.setContentText("INFORMATION MODIFIÉ AVEC SUCCES");
+        alert.setContentText("INFORMATION MODIFIÉE AVEC SUCCES");
         alert.showAndWait();
     }
 

@@ -23,9 +23,6 @@
               <Tab text="Gestion des informations personnelles">
                 <content>
                   <fx:include source="gestionInformationPersonnel.fxml" />
-
-                  <fx:include source="gestionInformationPersonnel.fxml" />
-
                 </content>
               </Tab>
                 <Tab text="Gestion des taches">
@@ -38,10 +35,16 @@
                   <fx:include source="gestionProjet.fxml"/>
               </content>
             </Tab>
+<<<<<<< HEAD
 
             <Tab text="Deconnexion">
                 <content>
                     <fx:include source="./../deconnexion.fxml"/>
+=======
+            <Tab text="Gestion des materielles">
+                <content>
+                    <fx:include source="gestionMATERIELLES.fxml" />
+>>>>>>> 3a297f10e69b4c07288310120d5f78c6d379540e
                 </content>
             </Tab>
         </tabs>

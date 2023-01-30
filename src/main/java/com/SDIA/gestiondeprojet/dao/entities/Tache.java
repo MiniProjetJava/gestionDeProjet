@@ -82,12 +82,6 @@ public class Tache implements Serializable {
 
     @Override
     public String toString() {
-        return "Tache {" +
-                "ID=" + ID +
-                ", ETAT='" + ETAT + '\'' +
-                ", CREATEUR='" + ID_CREATEUR + '\'' +
-                ", DESCRIPTION='" + DESCRIPTION + '\'' +
-                ", ID_PROJET='" + ID_PROJET + '\'' +
-                '}';
+        return this.getDESCRIPTION();
     }
 }
