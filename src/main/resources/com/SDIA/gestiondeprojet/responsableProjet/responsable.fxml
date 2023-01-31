@@ -9,30 +9,35 @@
    <top>
       <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-                <Tab text="Gestion des informations personnelles">
+            <Tab text="Acceuil">
+                <content>
+                    <fx:include source="acceuilResponsable.fxml" />
+                </content>
+            </Tab>
+            <Tab text="Gestion des informations personnelles">
                 <content>
                     <fx:include source="gestionInformationPersonnel.fxml" />
                 </content>
             </Tab>
-              <Tab text="Gestion des intervenants">
+            <Tab text="Gestion des taches">
                 <content>
-                   <fx:include source="gestionIntervenantInterface.fxml" />
+                    <fx:include source="gestionTACHES.fxml" />
                 </content>
-              </Tab>
+            </Tab>
             <Tab text="Gestion des taches des intervenants">
                 <content>
                     <fx:include source="gestionTacheUser.fxml" />
                 </content>
             </Tab>
-                <Tab text="Gestion des taches">
-                <content>
-                    <fx:include source="gestionTACHES.fxml" />
-                </content>
-                </Tab>
             <Tab text="Gestion de projet">
               <content>
                   <fx:include source="gestionProjet.fxml"/>
               </content>
+            </Tab>
+            <Tab text="Deconnexion">
+                <content>
+                    <fx:include source="./../deconnexion.fxml"/>
+                </content>
             </Tab>
             <Tab text="Gestion des materielles">
                 <content>

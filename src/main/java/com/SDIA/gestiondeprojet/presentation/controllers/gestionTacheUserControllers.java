@@ -120,6 +120,7 @@ public class gestionTacheUserControllers implements Initializable {
     public void refreshTable(){
         observableTU.clear();
         observableTU.addAll(tacheUserMetier.findAll());
+        observableMaterielle.clear();
     }
 
 }

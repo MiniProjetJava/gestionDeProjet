@@ -27,16 +27,6 @@ public class ResponsableMenuControllers implements Initializable {
 
     }
 
-    public void gestionDesIntervenants(ActionEvent actionEvent) throws IOException {
-
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("responsableProjet/gestionIntervenantInterface.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        stage.setTitle("Gestion des Intervenants");
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
     public void deconnection(ActionEvent actionEvent) throws IOException {
 

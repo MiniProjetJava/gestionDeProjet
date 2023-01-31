@@ -28,4 +28,6 @@ import java.util.List;
 
      List<Tache> selectTacheByProjet(Projet projet);
      List<Tache> selectTacheByDesc(String desc);
+
+     int nombreTache(Users users) throws SQLException;
 }

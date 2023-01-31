@@ -318,4 +318,19 @@ public class TacheDAOImpl implements TacheDAO{
             return null;
         }
     }
+
+    @Override
+    public int nombreDeTache(Users users) throws SQLException {
+        PreparedStatement pst = connection.prepareStatement("select count(*) as nombre from tache where ID_CREATEUR=? and ETAT=?");
+        pst.setLong(1, users.getID());
+        pst.setString(2, "En cours");
+        ResultSet rs =  pst.executeQuery();
+
+        int nombre = 0;
+        if (rs.next()){
+            nombre = rs.getInt("nombre");
+        }
+
+        return nombre;
+    }
 }

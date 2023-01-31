@@ -57,5 +57,10 @@ public class TacheMetierImpl implements TacheMetier {
         return tacheDAO.findByDescription(desc);
     }
 
+    @Override
+    public int nombreTache(Users users) throws SQLException {
+        return new TacheDAOImpl().nombreDeTache(users) ;
+    }
+
 
 }
