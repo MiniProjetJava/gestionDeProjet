@@ -38,7 +38,7 @@
                         <RowConstraints maxHeight="60.79999999999999" minHeight="10.0" prefHeight="10.400000000000006" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label fx:id="labelEtat" text="Tache">
+                        <Label fx:id="labelEtat" text="Etat de la tache">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
@@ -55,11 +55,7 @@
                               <Insets left="10.0" top="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <ComboBox fx:id="comboBoxMaterielle" prefHeight="26.0" prefWidth="411.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets bottom="20.0" top="40.0" />
-                           </GridPane.margin>
-                        </ComboBox>
+                        <TextField fx:id="MaterielleType" editable="false" promptText="Nom de projet " GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
@@ -80,19 +76,9 @@
          <center>
             <HBox prefHeight="100.0" prefWidth="830.0" spacing="80.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addMaterielle" prefHeight="14.0" prefWidth="98.0" text="Add">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#updateMaterielle" prefHeight="14.0" prefWidth="98.0" text="Update">
                      <HBox.margin>
-                        <Insets left="-20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteMaterielle" prefWidth="98.0" text="Remove">
-                     <HBox.margin>
-                        <Insets left="-23.0" />
+                        <Insets left="259.0" />
                      </HBox.margin>
                   </Button>
                   <Line endX="-99.44261169433594" endY="64.09288787841797" rotate="2.0" scaleX="3.0" startX="-98.394287109375" startY="151.15745544433594" translateY="-30.0">

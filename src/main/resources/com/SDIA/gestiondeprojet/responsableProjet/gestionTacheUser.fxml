@@ -4,20 +4,20 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SDIA.gestiondeprojet.presentation.controllers.gestionMaterielleControllers">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SDIA.gestiondeprojet.presentation.controllers.gestionTacheUserControllers">
    <top>
       <BorderPane prefHeight="718.0" prefWidth="830.0" BorderPane.alignment="CENTER">
          <top>
@@ -38,27 +38,59 @@
                         <RowConstraints maxHeight="60.79999999999999" minHeight="10.0" prefHeight="10.400000000000006" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label fx:id="labelEtat" text="Tache">
+                        <Label text="Tache">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
-                        <ComboBox fx:id="comboBoxTache" prefHeight="26.0" prefWidth="411.0" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="comboBoxTache" prefHeight="26.0" prefWidth="411.0" GridPane.columnIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ComboBox>
                         <Label text="Materielle" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="10.0" top="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextField fx:id="projetNom" editable="false" promptText="Nom de projet " GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="projetNom" editable="false" maxHeight="26.0" maxWidth="411.0" prefHeight="26.0" prefWidth="411.0" promptText="Nom de projet " GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets top="-33.0" />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
                         <Label text="Projet" GridPane.rowIndex="3">
                            <GridPane.margin>
-                              <Insets left="10.0" top="5.0" />
+                              <Insets left="10.0" top="-33.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <GridPane.margin>
+                              <Insets top="20.0" />
+                           </GridPane.margin>
+                        </DatePicker>
+                        <Label text="Dernier délai" GridPane.rowIndex="5">
+                           <GridPane.margin>
+                              <Insets left="9.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
                         <ComboBox fx:id="comboBoxMaterielle" prefHeight="26.0" prefWidth="411.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <Label text="Intervenants" GridPane.rowIndex="4">
                            <GridPane.margin>
-                              <Insets bottom="20.0" top="40.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
+                        </Label>
+                        <ComboBox fx:id="comboBoxIntervenants" prefHeight="26.0" prefWidth="411.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ComboBox>
                      </children>
                      <VBox.margin>
@@ -68,69 +100,58 @@
                </children>
             </VBox>
          </top>
-         <bottom>
-            <TableView fx:id="tableTacheMaterielle" prefHeight="423.0" BorderPane.alignment="CENTER">
-               <columns>
-                  <TableColumn fx:id="col_ID" prefWidth="48.800018310546875" resizable="false" text="ID" />
-                  <TableColumn fx:id="col_TACHE" minWidth="123.20001220703125" prefWidth="363.1999816894531" resizable="false" text="TACHE" />
-                  <TableColumn fx:id="col_MATERIELLE" minWidth="0.0" prefWidth="411.20001220703125" resizable="false" text="MATERIELLE" />
-               </columns>
-            </TableView>
-         </bottom>
          <center>
             <HBox prefHeight="100.0" prefWidth="830.0" spacing="80.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addMaterielle" prefHeight="14.0" prefWidth="98.0" text="Add">
+                  <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="14.0" prefWidth="98.0" text="Add">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#updateMaterielle" prefHeight="14.0" prefWidth="98.0" text="Update">
+                  <Button fx:id="updateBtn" mnemonicParsing="false" prefHeight="14.0" prefWidth="98.0" text="Update">
                      <HBox.margin>
                         <Insets left="-20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteMaterielle" prefWidth="98.0" text="Remove">
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" prefWidth="98.0" text="Remove">
                      <HBox.margin>
                         <Insets left="-23.0" />
                      </HBox.margin>
                   </Button>
-                  <Line endX="-99.44261169433594" endY="64.09288787841797" rotate="2.0" scaleX="3.0" startX="-98.394287109375" startY="151.15745544433594" translateY="-30.0">
+                  <Button mnemonicParsing="false" onAction="#refreshTable" prefWidth="98.0" text="Refresh">
                      <HBox.margin>
-                        <Insets />
+                        <Insets left="500.0" />
                      </HBox.margin>
-                  </Line>
-                  <HBox prefHeight="65.0" prefWidth="363.0" spacing="20.0">
-                     <children>
-                        <Label text="Search">
-                           <HBox.margin>
-                              <Insets left="36.0" top="3.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="searchField" promptText="Description d'une tache...">
-                           <HBox.margin>
-                              <Insets left="8.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" onAction="#refreshTable" text="Refresh">
-                           <cursor>
-                              <Cursor fx:constant="WAIT" />
-                           </cursor>
-                        </Button>
-                     </children>
-                  </HBox>
+                     <cursor>
+                        <Cursor fx:constant="WAIT" />
+                     </cursor>
+                  </Button>
                </children>
                <padding>
                   <Insets bottom="-29.0" top="35.0" />
                </padding>
                <BorderPane.margin>
-                  <Insets top="-57.0" />
+                  <Insets top="-17.0" />
                </BorderPane.margin>
             </HBox>
          </center>
+         <bottom>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="tableTacheUser" prefHeight="423.0">
+                     <columns>
+                        <TableColumn fx:id="col_ID" prefWidth="48.800018310546875" resizable="false" text="ID" />
+                        <TableColumn fx:id="col_TACHE" minWidth="123.20001220703125" prefWidth="363.1999816894531" resizable="false" text="TACHE" />
+                        <TableColumn fx:id="col_USER_EMAIL" minWidth="123.20001220703125" prefWidth="250.0" resizable="false" text="USER EMAIL" />
+                        <TableColumn fx:id="col_DEADLINE" minWidth="0.0" prefWidth="165.0" resizable="false" text="DEADLINE" />
+                     </columns>
+                  </TableView>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="300.0" top="40.0" />
+               </BorderPane.margin>
+            </AnchorPane>
+         </bottom>
       </BorderPane>
    </top>
 </BorderPane>

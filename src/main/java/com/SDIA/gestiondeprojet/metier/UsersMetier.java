@@ -17,8 +17,13 @@ public class UsersMetier implements IMetier<Users>{
     }
 
     @Override
-    public List<Intervenant> getAll() throws SQLException {
-        return null;
+    public List<Users> getAll() throws SQLException {
+        return new UsersDAOImpl().findAll();
+    }
+
+
+    public List<Users> getAllIntervenant() throws SQLException {
+        return new UsersDAOImpl().findByRole("INTERVENANT");
     }
 
     @Override

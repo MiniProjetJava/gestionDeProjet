@@ -82,6 +82,12 @@ public class AssocTacheUserDAOImpl implements AssocTacheUserDAO {
                 ATU.setID(rs.getLong("ID"));
                 ATU.setID_USER(rs.getLong("ID_USER"));
                 ATU.setID_TACHE(rs.getLong("ID_TACHE"));
+                //Ajout de la tache
+                ATU.setTACHE(new TacheDAOImpl().findById(ATU.getID_TACHE()));
+                //Ajout de l'email de l'intervenant occupé par cette tache
+                ATU.setUSER_EMAIL(new UsersDAOImpl().findById(ATU.getID_USER()).getMAIL());
+                //Ajout de DEADLINE de la tache
+                ATU.setDEADLINE(rs.getDate("DEADLINE"));
 
                 listTaMa.add(ATU);
             }
@@ -106,6 +112,12 @@ public class AssocTacheUserDAOImpl implements AssocTacheUserDAO {
                 ATU.setID(rs.getLong("ID"));
                 ATU.setID_USER(rs.getLong("ID_USER"));
                 ATU.setID_TACHE(rs.getLong("ID_TACHE"));
+                //Ajout de la tache
+                ATU.setTACHE(new TacheDAOImpl().findById(ATU.getID_TACHE()));
+                //Ajout de l'email de l'intervenant occupé par cette tache
+                ATU.setUSER_EMAIL(new UsersDAOImpl().findById(ATU.getID_USER()).getMAIL());
+                //Ajout de DEADLINE de la tache
+                ATU.setDEADLINE(rs.getDate("DEADLINE"));
             }
            else {
                 System.out.println("[INFO]-> The occurence  with ID+"+X+" doesn't exist in table AssocTacheUser !!");
@@ -125,17 +137,18 @@ public class AssocTacheUserDAOImpl implements AssocTacheUserDAO {
 
 
     @Override
-    public void save(Tache tache, Users user) {
+    public void save(AssocTacheUser ATU) {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into AssocTacheUser " +
-                    "values(null, ?, ?)");
+                    "values(null, ?, ?, ?)");
 
-            ps.setLong(1, tache.getID());
-            ps.setLong(2, user.getID());
+            ps.setLong(1, ATU.getTACHE().getID());
+            ps.setLong(2, ATU.getID_USER());
+            ps.setDate(3, ATU.getDEADLINE());
             int AffectedRow = ps.executeUpdate();
 
             if (AffectedRow > 0) {
-                System.out.println("[INFO]-> the new occurence  [ID_TACHE: " + tache.getID() + "| ID_USER: " + user.getID() + "] has been inserted successfully in table AssocTacheUser !");
+                System.out.println("[INFO]-> the new occurence  [ID_TACHE: " + ATU.getTACHE().getID() + "| ID_USER: " + ATU.getID_USER() + "] has been inserted successfully in table AssocTacheUser !");
             }
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / INSERT > AssocTacheUserDAOImpl]-> " + e.getMessage());
@@ -144,16 +157,15 @@ public class AssocTacheUserDAOImpl implements AssocTacheUserDAO {
     }
 
     @Override
-    public void delete(Tache tache, Users user) {
+    public void delete(AssocTacheUser ATU) {
         try {
             PreparedStatement ps = connection.prepareStatement("delete from AssocTacheUser " +
-                    "where ID_TACHE = "+tache.getID()+" "+
-                    "and ID_USER = "+user.getID());
+                    "where ID = "+ATU.getID());
 
             int AffectedRow = ps.executeUpdate();
 
             if (AffectedRow > 0) {
-                System.out.println("[INFO]-> the old occurence  [ID_TACHE: " + tache.getID() + "| ID_USER: " + user.getID() + "] has been deleted successfully from table AssocTacheUser !");
+                System.out.println("[INFO]-> the old occurence  [ID_TACHE: " + ATU.getTACHE().getID() + "| ID_USER: " + ATU.getID_USER() +"] has been deleted successfully from table AssocTacheUser !");
             }
         } catch (SQLException e) {
             System.out.println("[EXCEPTION TRIGGERED / INSERT > AssocTacheUserDAOImpl]-> " + e.getMessage());
@@ -161,13 +173,4 @@ public class AssocTacheUserDAOImpl implements AssocTacheUserDAO {
 
     }
 
-    @Override
-    public void save(AssocTacheUser Element) {
-
-    }
-
-    @Override
-    public void delete(AssocTacheUser p) {
-
-    }
 }
